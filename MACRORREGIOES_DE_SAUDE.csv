@@ -1,0 +1,498 @@
+IBGE,municipio,CRS,regiao_saude,macrorregiao,COREDES
+430003,Aceguá,7,R 22 - Pampa,Sul,Campanha
+430005,Água Santa,6,R 18 - Região das Araucárias,Norte,Nordeste
+430010,Agudo,4,R 01 - Verdes Campos,Centro-Oeste,Central
+430020,Ajuricaba,17,R 13 - Região da Diversidade,Missioneira,Noroeste Colonial
+430030,Alecrim,14,R 14 - Fronteira Noroeste,Missioneira,Fronteira Noroeste
+430040,Alegrete,10,R 03 - Fronteira Oeste,Centro-Oeste,Fronteira Oeste
+430045,Alegria,14,R 14 - Fronteira Noroeste,Missioneira,Fronteira Noroeste
+430047,Almirante Tamandaré do Sul,6,R 17 - Região do Planalto,Norte,Produção
+430050,Alpestre,19,R 15 - Caminho das Águas,Norte,Médio Alto Uruguai
+430055,Alto Alegre,6,R 19 - Região do Botucaraí,Norte,Alto da Serra do Botucaraí
+430057,Alto Feliz,5,R 26 - Uva e Vale,Serra,Vale do Caí
+430060,Alvorada,2,R 10 - CapitalVale do Gravataí,Metropolitana,Metropolitano do Delta do Jacuí
+430063,Amaral Ferrador,3,R 21 - Região Sul,Sul,Sul
+430064,Ametista do Sul,19,R 15 - Caminho das Águas,Norte,Médio Alto Uruguai
+430066,André da Rocha,6,R 18 - Região das Araucárias,Norte,Campos de Cima da Serra
+430070,Anta Gorda,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+430080,Antônio Prado,5,R 26 - Uva e Vale,Serra,Serra
+430085,Arambaré,2,R 09 - Carbonífera/Costa Doce,Metropolitana,Centro Sul
+430087,Araricá,1,R 07 - Vale dos Sinos,Metropolitana,Vale do Rio dos Sinos
+430090,Aratiba,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+430100,Arroio do Meio,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+430107,Arroio do Padre,3,R 21 - Região Sul,Sul,Sul
+430105,Arroio do Sal,18,R 04 - Belas Praias,Metropolitana,Litoral
+430120,Arroio do Tigre,8,R 27 - Jacuí Centro,Vales,Vale do Rio Pardo
+430110,Arroio dos Ratos,2,R 09 - Carbonífera/Costa Doce,Metropolitana,Centro Sul
+430130,Arroio Grande,3,R 21 - Região Sul,Sul,Sul
+430140,Arvorezinha,6,R 19 - Região do Botucaraí,Norte,Vale do Taquari
+430150,Augusto Pestana,17,R 13 - Região da Diversidade,Missioneira,Noroeste Colonial
+430155,Áurea,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+430160,Bagé,7,R 22 - Pampa,Sul,Campanha
+430163,Balneário Pinhal,18,R 05 - Bons Ventos,Metropolitana,Litoral
+430165,Barão,1,R 08 - Vale do Caí Metropolitana,Metropolitana,Vale do Caí
+430170,Barão de Cotegipe,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+430175,Barão do Triunfo,2,R 09 - Carbonífera/Costa Doce,Metropolitana,Centro Sul
+430185,Barra do Guarita,19,R 15 - Caminho das Águas,Norte,Celeiro
+430187,Barra do Quaraí,10,R 03 - Fronteira Oeste,Centro-Oeste,Fronteira Oeste
+430190,Barra do Ribeiro,2,R 09 - Carbonífera/Costa Doce,Metropolitana,Centro Sul
+430192,Barra do Rio Azul,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+430195,Barra Funda,15,R 20 - Rota da Produção,Norte,Rio da Várzea
+430180,Barracão,6,R 18 - Região das Araucárias,Norte,Nordeste
+430200,Barros Cassal,6,R 19 - Região do Botucaraí,Norte,Alto da Serra do Botucaraí
+430205,Benjamin Constant do Sul,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+430210,Bento Gonçalves,5,R 25 - Vinhedos e Basalto,Serra,Serra
+430215,Boa Vista das Missões,15,R 20 - Rota da Produção,Norte,Rio da Várzea
+430220,Boa Vista do Buricá,14,R 14 - Fronteira Noroeste,Missioneira,Fronteira Noroeste
+430222,Boa Vista do Cadeado,9,R 12 - Portal das Missões,Missioneira,Alto Jacuí
+430223,Boa Vista do Incra,9,R 12 - Portal das Missões,Missioneira,Alto Jacuí
+430225,Boa Vista do Sul,5,R 25 - Vinhedos e Basalto,Serra,Serra
+430230,Bom Jesus,5,R 24 - Campos de Cima da Serra,Serra,Campos de Cima da Serra
+430235,Bom Princípio,5,R 26 - Uva e Vale,Serra,Vale do Caí
+430237,Bom Progresso,19,R 15 - Caminho das Águas,Norte,Celeiro
+430240,Bom Retiro do Sul,16,R 30 - Vale da Luz,Vales,Vale do Taquari
+430245,Boqueirão do Leão,16,R 29 - Vales e Montanhas,Vales,Vale do Rio Pardo
+430250,Bossoroca,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+430258,Bozano,17,R 13 - Região da Diversidade,Missioneira,Noroeste Colonial
+430260,Braga,15,R 20 - Rota da Produção,Norte,Celeiro
+430265,Brochier,1,R 08 - Vale do Caí Metropolitana,Metropolitana,Vale do Caí
+430270,Butiá,2,R 09 - Carbonífera/Costa Doce,Metropolitana,Centro Sul
+430280,Caçapava do Sul,8,R 27 - Jacuí Centro,Vales,Campanha
+430290,Cacequi,4,R 02 - Entre-Rios,Centro-Oeste,Vale do Jaguari
+430300,Cachoeira do Sul,8,R 27 - Jacuí Centro,Vales,Jacuí Centro
+430310,Cachoeirinha,2,R 10 - CapitalVale do Gravataí,Metropolitana,Metropolitano do Delta do Jacuí
+430320,Cacique Doble,6,R 18 - Região das Araucárias,Norte,Nordeste
+430330,Caibaté,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+430340,Caiçara,19,R 15 - Caminho das Águas,Norte,Médio Alto Uruguai
+430350,Camaquã,2,R 09 - Carbonífera/Costa Doce,Metropolitana,Centro Sul
+430355,Camargo,6,R 17 - Região do Planalto,Norte,Produção
+430360,Cambará do Sul,1,R 06 - Vale do Paranhana Costa da Serra,Metropolitana,Hortênsias
+430367,Campestre da Serra,5,R 24 - Campos de Cima da Serra,Serra,Campos de Cima da Serra
+430370,Campina das Missões,14,R 14 - Fronteira Noroeste,Missioneira,Fronteira Noroeste
+430380,Campinas do Sul,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+430390,Campo Bom,1,R 07 - Vale dos Sinos,Metropolitana,Vale do Rio dos Sinos
+430400,Campo Novo,17,R 13 - Região da Diversidade,Missioneira,Celeiro
+430410,Campos Borges,6,R 19 - Região do Botucaraí,Norte,Alto da Serra do Botucaraí
+430420,Candelária,13,R 28 - Vinte e Oito,Vales,Vale do Rio Pardo
+430430,Cândido Godói,14,R 14 - Fronteira Noroeste,Missioneira,Fronteira Noroeste
+430435,Candiota,7,R 22 - Pampa,Sul,Campanha
+430440,Canela,5,R 23 - Caxias e Hortências,Serra,Hortênsias
+430450,Canguçu,3,R 21 - Região Sul,Sul,Sul
+430460,Canoas,1,R 08 - Vale do Caí Metropolitana,Metropolitana,Vale do Rio dos Sinos
+430461,Canudos do Vale,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+430462,Capão Bonito do Sul,6,R 18 - Região das Araucárias,Norte,Nordeste
+430463,Capão da Canoa,18,R 04 - Belas Praias,Metropolitana,Litoral
+430465,Capão do Cipó,4,R 02 - Entre-Rios,Centro-Oeste,Vale do Jaguari
+430466,Capão do Leão,3,R 21 - Região Sul,Sul,Sul
+430468,Capela de Santana,1,R 08 - Vale do Caí Metropolitana,Metropolitana,Vale do Caí
+430469,Capitão,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+430467,Capivari do Sul,18,R 05 - Bons Ventos,Metropolitana,Litoral
+430471,Caraá,18,R 05 - Bons Ventos,Metropolitana,Litoral
+430470,Carazinho,6,R 17 - Região do Planalto,Norte,Produção
+430480,Carlos Barbosa,5,R 25 - Vinhedos e Basalto,Serra,Serra
+430485,Carlos Gomes,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+430490,Casca,6,R 17 - Região do Planalto,Norte,Produção
+430495,Caseiros,6,R 18 - Região das Araucárias,Norte,Nordeste
+430500,Catuípe,17,R 13 - Região da Diversidade,Missioneira,Noroeste Colonial
+430510,Caxias do Sul,5,R 23 - Caxias e Hortências,Serra,Serra
+430511,Centenário,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+430512,Cerrito,3,R 21 - Região Sul,Sul,Sul
+430513,Cerro Branco,8,R 27 - Jacuí Centro,Vales,Jacuí Centro
+430515,Cerro Grande,15,R 20 - Rota da Produção,Norte,Rio da Várzea
+430517,Cerro Grande do Sul,2,R 09 - Carbonífera/Costa Doce,Metropolitana,Centro Sul
+430520,Cerro Largo,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+430530,Chapada,15,R 20 - Rota da Produção,Norte,Rio da Várzea
+430535,Charqueadas,2,R 09 - Carbonífera/Costa Doce,Metropolitana,Centro Sul
+430537,Charrua,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+430540,Chiapetta,17,R 13 - Região da Diversidade,Missioneira,Celeiro
+430543,Chuí,3,R 21 - Região Sul,Sul,Sul
+430544,Chuvisca,2,R 09 - Carbonífera/Costa Doce,Metropolitana,Centro Sul
+430545,Cidreira,18,R 05 - Bons Ventos,Metropolitana,Litoral
+430550,Ciríaco,6,R 17 - Região do Planalto,Norte,Produção
+430558,Colinas,16,R 30 - Vale da Luz,Vales,Vale do Taquari
+430560,Colorado,9,R 12 - Portal das Missões,Missioneira,Alto Jacuí
+430570,Condor,17,R 13 - Região da Diversidade,Missioneira,Noroeste Colonial
+430580,Constantina,15,R 20 - Rota da Produção,Norte,Rio da Várzea
+430583,Coqueiro Baixo,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+430585,Coqueiros do Sul,6,R 17 - Região do Planalto,Norte,Produção
+430587,Coronel Barros,17,R 13 - Região da Diversidade,Missioneira,Noroeste Colonial
+430590,Coronel Bicaco,15,R 20 - Rota da Produção,Norte,Celeiro
+430593,Coronel Pilar,5,R 25 - Vinhedos e Basalto,Serra,Serra
+430595,Cotiporã,5,R 25 - Vinhedos e Basalto,Serra,Serra
+430597,Coxilha,6,R 17 - Região do Planalto,Norte,Produção
+430600,Crissiumal,17,R 13 - Região da Diversidade,Missioneira,Celeiro
+430605,Cristal,3,R 21 - Região Sul,Sul,Centro Sul
+430607,Cristal do Sul,19,R 15 - Caminho das Águas,Norte,Médio Alto Uruguai
+430610,Cruz Alta,9,R 12 - Portal das Missões,Missioneira,Alto Jacuí
+430613,Cruzaltense,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+430620,Cruzeiro do Sul,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+430630,David Canabarro,6,R 17 - Região do Planalto,Norte,Produção
+430632,Derrubadas,19,R 15 - Caminho das Águas,Norte,Celeiro
+430635,Dezesseis de Novembro,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+430637,Dilermando de Aguiar,4,R 01 - Verdes Campos,Centro-Oeste,Central
+430640,Dois Irmãos,1,R 07 - Vale dos Sinos,Metropolitana,Vale do Rio dos Sinos
+430642,Dois Irmãos das Missões,15,R 20 - Rota da Produção,Norte,Médio Alto Uruguai
+430645,Dois Lajeados,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+430650,Dom Feliciano,2,R 09 - Carbonífera/Costa Doce,Metropolitana,Centro Sul
+430660,Dom Pedrito,7,R 22 - Pampa,Sul,Campanha
+430655,Dom Pedro de Alcântara,18,R 04 - Belas Praias,Metropolitana,Litoral
+430670,Dona Francisca,4,R 01 - Verdes Campos,Centro-Oeste,Central
+430673,Doutor Maurício Cardoso,14,R 14 - Fronteira Noroeste,Missioneira,Fronteira Noroeste
+430675,Doutor Ricardo,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+430676,Eldorado do Sul,2,R 09 - Carbonífera/Costa Doce,Metropolitana,Metropolitano do Delta do Jacuí
+430680,Encantado,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+430690,Encruzilhada do Sul,8,R 27 - Jacuí Centro,Vales,Vale do Rio Pardo
+430692,Engenho Velho,15,R 20 - Rota da Produção,Norte,Rio da Várzea
+430695,Entre Rios do Sul,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+430693,Entre-Ijuís,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+430697,Erebango,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+430700,Erechim,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+430705,Ernestina,6,R 17 - Região do Planalto,Norte,Produção
+430720,Erval Grande,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+430730,Erval Seco,19,R 15 - Caminho das Águas,Norte,Médio Alto Uruguai
+430740,Esmeralda,5,R 24 - Campos de Cima da Serra,Serra,Campos de Cima da Serra
+430745,Esperança do Sul,19,R 15 - Caminho das Águas,Norte,Celeiro
+430750,Espumoso,6,R 19 - Região do Botucaraí,Norte,Alto da Serra do Botucaraí
+430755,Estação,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+430760,Estância Velha,1,R 07 - Vale dos Sinos,Metropolitana,Vale do Rio dos Sinos
+430770,Esteio,1,R 08 - Vale do Caí Metropolitana,Metropolitana,Vale do Rio dos Sinos
+430780,Estrela,16,R 30 - Vale da Luz,Vales,Vale do Taquari
+430781,Estrela Velha,8,R 27 - Jacuí Centro,Vales,Vale do Rio Pardo
+430783,Eugênio de Castro,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+430786,Fagundes Varela,5,R 25 - Vinhedos e Basalto,Serra,Serra
+430790,Farroupilha,5,R 26 - Uva e Vale,Serra,Serra
+430800,Faxinal do Soturno,4,R 01 - Verdes Campos,Centro-Oeste,Central
+430805,Faxinalzinho,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+430807,Fazenda Vilanova,16,R 30 - Vale da Luz,Vales,Vale do Taquari
+430810,Feliz,5,R 26 - Uva e Vale,Serra,Vale do Caí
+430820,Flores da Cunha,5,R 26 - Uva e Vale,Serra,Serra
+430825,Floriano Peixoto,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+430830,Fontoura Xavier,6,R 19 - Região do Botucaraí,Norte,Alto da Serra do Botucaraí
+430840,Formigueiro,4,R 01 - Verdes Campos,Centro-Oeste,Central
+430843,Forquetinha,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+430845,Fortaleza dos Valos,9,R 12 - Portal das Missões,Missioneira,Alto Jacuí
+430850,Frederico Westphalen,19,R 15 - Caminho das Águas,Norte,Médio Alto Uruguai
+430860,Garibaldi,5,R 25 - Vinhedos e Basalto,Serra,Serra
+430865,Garruchos,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+430870,Gaurama,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+430880,General Câmara,2,R 09 - Carbonífera/Costa Doce,Metropolitana,Vale do Rio Pardo
+430885,Gentil,6,R 17 - Região do Planalto,Norte,Produção
+430890,Getúlio Vargas,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+430900,Giruá,14,R 14 - Fronteira Noroeste,Missioneira,Missões
+430905,Glorinha,2,R 10 - CapitalVale do Gravataí,Metropolitana,Metropolitano do Delta do Jacuí
+430910,Gramado,5,R 23 - Caxias e Hortências,Serra,Hortênsias
+430912,Gramado dos Loureiros,15,R 20 - Rota da Produção,Norte,Médio Alto Uruguai
+430915,Gramado Xavier,13,R 28 - Vinte e Oito,Vales,Alto da Serra do Botucaraí
+430920,Gravataí,2,R 10 - CapitalVale do Gravataí,Metropolitana,Metropolitano do Delta do Jacuí
+430925,Guabiju,5,R 25 - Vinhedos e Basalto,Serra,Serra
+430930,Guaíba,2,R 09 - Carbonífera/Costa Doce,Metropolitana,Metropolitano do Delta do Jacuí
+430940,Guaporé,5,R 25 - Vinhedos e Basalto,Serra,Serra
+430950,Guarani das Missões,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+430955,Harmonia,1,R 08 - Vale do Caí Metropolitana,Metropolitana,Vale do Caí
+430710,Herval,3,R 21 - Região Sul,Sul,Sul
+430957,Herveiras,13,R 28 - Vinte e Oito,Vales,Vale do Rio Pardo
+430960,Horizontina,14,R 14 - Fronteira Noroeste,Missioneira,Fronteira Noroeste
+430965,Hulha Negra,7,R 22 - Pampa,Sul,Campanha
+430970,Humaitá,17,R 13 - Região da Diversidade,Missioneira,Celeiro
+430975,Ibarama,8,R 27 - Jacuí Centro,Vales,Vale do Rio Pardo
+430980,Ibiaçá,6,R 18 - Região das Araucárias,Norte,Nordeste
+430990,Ibiraiaras,6,R 18 - Região das Araucárias,Norte,Nordeste
+430995,Ibirapuitã,6,R 19 - Região do Botucaraí,Norte,Alto da Serra do Botucaraí
+431000,Ibirubá,9,R 12 - Portal das Missões,Missioneira,Alto Jacuí
+431010,Igrejinha,1,R 06 - Vale do Paranhana Costa da Serra,Metropolitana,Paranhana Encosta da Serra
+431020,Ijuí,17,R 13 - Região da Diversidade,Missioneira,Noroeste Colonial
+431030,Ilópolis,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+431033,Imbé,18,R 05 - Bons Ventos,Metropolitana,Litoral
+431036,Imigrante,16,R 30 - Vale da Luz,Vales,Vale do Taquari
+431040,Independência,14,R 14 - Fronteira Noroeste,Missioneira,Fronteira Noroeste
+431041,Inhacorá,17,R 13 - Região da Diversidade,Missioneira,Celeiro
+431043,Ipê,5,R 26 - Uva e Vale,Serra,Campos de Cima da Serra
+431046,Ipiranga do Sul,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+431050,Iraí,19,R 15 - Caminho das Águas,Norte,Médio Alto Uruguai
+431053,Itaara,4,R 01 - Verdes Campos,Centro-Oeste,Central
+431055,Itacurubi,4,R 02 - Entre-Rios,Centro-Oeste,Fronteira Oeste
+431057,Itapuca,6,R 19 - Região do Botucaraí,Norte,Alto da Serra do Botucaraí
+431060,Itaqui,10,R 03 - Fronteira Oeste,Centro-Oeste,Fronteira Oeste
+431065,Itati,18,R 04 - Belas Praias,Metropolitana,Litoral
+431070,Itatiba do Sul,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+431075,Ivorá,4,R 01 - Verdes Campos,Centro-Oeste,Central
+431080,Ivoti,1,R 07 - Vale dos Sinos,Metropolitana,Vale do Rio dos Sinos
+431085,Jaboticaba,15,R 20 - Rota da Produção,Norte,Rio da Várzea
+431087,Jacuizinho,9,R 12 - Portal das Missões,Missioneira,Alto da Serra do Botucaraí
+431090,Jacutinga,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+431100,Jaguarão,3,R 21 - Região Sul,Sul,Sul
+431110,Jaguari,4,R 02 - Entre-Rios,Centro-Oeste,Vale do Jaguari
+431112,Jaquirana,5,R 24 - Campos de Cima da Serra,Serra,Hortênsias
+431113,Jari,4,R 02 - Entre-Rios,Centro-Oeste,Central
+431115,Jóia,17,R 13 - Região da Diversidade,Missioneira,Noroeste Colonial
+431120,Júlio de Castilhos,4,R 01 - Verdes Campos,Centro-Oeste,Central
+431123,Lagoa Bonita do Sul,8,R 27 - Jacuí Centro,Vales,Vale do Rio Pardo
+431127,Lagoa dos Três Cantos,6,R 17 - Região do Planalto,Norte,Alto Jacuí
+431130,Lagoa Vermelha,6,R 18 - Região das Araucárias,Norte,Nordeste
+431125,Lagoão,6,R 19 - Região do Botucaraí,Norte,Alto da Serra do Botucaraí
+431140,Lajeado,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+431142,Lajeado do Bugre,15,R 20 - Rota da Produção,Norte,Rio da Várzea
+431150,Lavras do Sul,7,R 22 - Pampa,Sul,Campanha
+431160,Liberato Salzano,19,R 15 - Caminho das Águas,Norte,Rio da Várzea
+431162,Lindolfo Collor,1,R 07 - Vale dos Sinos,Metropolitana,Paranhana Encosta da Serra
+431164,Linha Nova,5,R 23 - Caxias e Hortências,Serra,Vale do Caí
+431171,Maçambará,10,R 03 - Fronteira Oeste,Centro-Oeste,Fronteira Oeste
+431170,Machadinho,6,R 18 - Região das Araucárias,Norte,Nordeste
+431173,Mampituba,18,R 04 - Belas Praias,Metropolitana,Litoral
+431175,Manoel Viana,10,R 03 - Fronteira Oeste,Centro-Oeste,Fronteira Oeste
+431177,Maquiné,18,R 04 - Belas Praias,Metropolitana,Litoral
+431179,Maratá,1,R 08 - Vale do Caí Metropolitana,Metropolitana,Vale do Caí
+431180,Marau,6,R 17 - Região do Planalto,Norte,Produção
+431190,Marcelino Ramos,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+431198,Mariana Pimentel,2,R 09 - Carbonífera/Costa Doce,Metropolitana,Centro Sul
+431200,Mariano Moro,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+431205,Marques de Souza,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+431210,Mata,4,R 02 - Entre-Rios,Centro-Oeste,Vale do Jaguari
+431213,Mato Castelhano,6,R 17 - Região do Planalto,Norte,Produção
+431215,Mato Leitão,13,R 28 - Vinte e Oito,Vales,Vale do Rio Pardo
+431217,Mato Queimado,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+431220,Maximiliano de Almeida,6,R 18 - Região das Araucárias,Norte,Nordeste
+431225,Minas do Leão,2,R 09 - Carbonífera/Costa Doce,Metropolitana,Centro Sul
+431230,Miraguaí,15,R 20 - Rota da Produção,Norte,Celeiro
+431235,Montauri,6,R 17 - Região do Planalto,Norte,Serra
+431237,Monte Alegre dos Campos,5,R 24 - Campos de Cima da Serra,Serra,Campos de Cima da Serra
+431238,Monte Belo do Sul,5,R 25 - Vinhedos e Basalto,Serra,Serra
+431240,Montenegro,1,R 08 - Vale do Caí Metropolitana,Metropolitana,Vale do Caí
+431242,Mormaço,6,R 19 - Região do Botucaraí,Norte,Alto da Serra do Botucaraí
+431244,Morrinhos do Sul,18,R 04 - Belas Praias,Metropolitana,Litoral
+431245,Morro Redondo,3,R 21 - Região Sul,Sul,Sul
+431247,Morro Reuter,1,R 07 - Vale dos Sinos,Metropolitana,Paranhana Encosta da Serra
+431250,Mostardas,18,R 05 - Bons Ventos,Metropolitana,Litoral
+431260,Muçum,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+431261,Muitos Capões,5,R 24 - Campos de Cima da Serra,Serra,Campos de Cima da Serra
+431262,Muliterno,6,R 17 - Região do Planalto,Norte,Produção
+431265,Não-Me-Toque,6,R 17 - Região do Planalto,Norte,Alto Jacuí
+431267,Nicolau Vergueiro,6,R 17 - Região do Planalto,Norte,Alto da Serra do Botucaraí
+431270,Nonoai,11,R 16 - Alto Uruguai Gaúcho,Norte,Médio Alto Uruguai
+431275,Nova Alvorada,6,R 17 - Região do Planalto,Norte,Produção
+431280,Nova Araçá,5,R 25 - Vinhedos e Basalto,Serra,Serra
+431290,Nova Bassano,5,R 25 - Vinhedos e Basalto,Serra,Serra
+431295,Nova Boa Vista,15,R 20 - Rota da Produção,Norte,Rio da Várzea
+431300,Nova Bréscia,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+431301,Nova Candelária,14,R 14 - Fronteira Noroeste,Missioneira,Fronteira Noroeste
+431303,Nova Esperança do Sul,4,R 02 - Entre-Rios,Centro-Oeste,Vale do Jaguari
+431306,Nova Hartz,1,R 07 - Vale dos Sinos,Metropolitana,Vale do Rio dos Sinos
+431308,Nova Pádua,5,R 26 - Uva e Vale,Serra,Serra
+431310,Nova Palma,4,R 01 - Verdes Campos,Centro-Oeste,Central
+431320,Nova Petrópolis,5,R 23 - Caxias e Hortências,Serra,Hortênsias
+431330,Nova Prata,5,R 25 - Vinhedos e Basalto,Serra,Serra
+431333,Nova Ramada,17,R 13 - Região da Diversidade,Missioneira,Noroeste Colonial
+431335,Nova Roma do Sul,5,R 26 - Uva e Vale,Serra,Serra
+431337,Nova Santa Rita,1,R 08 - Vale do Caí Metropolitana,Metropolitana,Vale do Rio dos Sinos
+431349,Novo Barreiro,15,R 20 - Rota da Produção,Norte,Rio da Várzea
+431339,Novo Cabrais,8,R 27 - Jacuí Centro,Vales,Jacuí Centro
+431340,Novo Hamburgo,1,R 07 - Vale dos Sinos,Metropolitana,Vale do Rio dos Sinos
+431342,Novo Machado,14,R 14 - Fronteira Noroeste,Missioneira,Fronteira Noroeste
+431344,Novo Tiradentes,19,R 15 - Caminho das Águas,Norte,Médio Alto Uruguai
+431346,Novo Xingu,15,R 20 - Rota da Produção,Norte,Rio da Várzea
+431350,Osório,18,R 05 - Bons Ventos,Metropolitana,Litoral
+431360,Paim Filho,6,R 18 - Região das Araucárias,Norte,Nordeste
+431365,Palmares do Sul,18,R 05 - Bons Ventos,Metropolitana,Litoral
+431370,Palmeira das Missões,15,R 20 - Rota da Produção,Norte,Rio da Várzea
+431380,Palmitinho,19,R 15 - Caminho das Águas,Norte,Médio Alto Uruguai
+431390,Panambi,17,R 13 - Região da Diversidade,Missioneira,Noroeste Colonial
+431395,Pantano Grande,13,R 28 - Vinte e Oito,Vales,Vale do Rio Pardo
+431400,Paraí,5,R 25 - Vinhedos e Basalto,Serra,Serra
+431402,Paraíso do Sul,4,R 01 - Verdes Campos,Centro-Oeste,Jacuí Centro
+431403,Pareci Novo,1,R 08 - Vale do Caí Metropolitana,Metropolitana,Vale do Caí
+431405,Parobé,1,R 06 - Vale do Paranhana Costa da Serra,Metropolitana,Paranhana Encosta da Serra
+431406,Passa Sete,8,R 27 - Jacuí Centro,Vales,Vale do Rio Pardo
+431407,Passo do Sobrado,13,R 28 - Vinte e Oito,Vales,Vale do Rio Pardo
+431410,Passo Fundo,6,R 17 - Região do Planalto,Norte,Produção
+431413,Paulo Bento,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+431415,Paverama,16,R 30 - Vale da Luz,Vales,Vale do Taquari
+431417,Pedras Altas,3,R 21 - Região Sul,Sul,Sul
+431420,Pedro Osório,3,R 21 - Região Sul,Sul,Sul
+431430,Pejuçara,17,R 13 - Região da Diversidade,Missioneira,Noroeste Colonial
+431440,Pelotas,3,R 21 - Região Sul,Sul,Sul
+431442,Picada Café,5,R 23 - Caxias e Hortências,Serra,Hortênsias
+431445,Pinhal,19,R 15 - Caminho das Águas,Norte,Médio Alto Uruguai
+431446,Pinhal da Serra,5,R 24 - Campos de Cima da Serra,Serra,Campos de Cima da Serra
+431447,Pinhal Grande,4,R 01 - Verdes Campos,Centro-Oeste,Central
+431449,Pinheirinho do Vale,19,R 15 - Caminho das Águas,Norte,Médio Alto Uruguai
+431450,Pinheiro Machado,3,R 21 - Região Sul,Sul,Sul
+431454,Pinto Bandeira,5,R 25 - Vinhedos e Basalto,Serra,Serra
+431455,Pirapó,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+431460,Piratini,3,R 21 - Região Sul,Sul,Sul
+431470,Planalto,19,R 15 - Caminho das Águas,Norte,Médio Alto Uruguai
+431475,Poço das Antas,16,R 30 - Vale da Luz,Vales,Vale do Taquari
+431477,Pontão,6,R 17 - Região do Planalto,Norte,Produção
+431478,Ponte Preta,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+431480,Portão,1,R 07 - Vale dos Sinos,Metropolitana,Vale do Rio dos Sinos
+431490,Porto Alegre,2,R 10 - CapitalVale do Gravataí,Metropolitana,Metropolitano do Delta do Jacuí
+431500,Porto Lucena,14,R 14 - Fronteira Noroeste,Missioneira,Fronteira Noroeste
+431505,Porto Mauá,14,R 14 - Fronteira Noroeste,Missioneira,Fronteira Noroeste
+431507,Porto Vera Cruz,14,R 14 - Fronteira Noroeste,Missioneira,Fronteira Noroeste
+431510,Porto Xavier,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+431513,Pouso Novo,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+431514,Presidente Lucena,1,R 07 - Vale dos Sinos,Metropolitana,Paranhana Encosta da Serra
+431515,Progresso,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+431517,Protásio Alves,5,R 25 - Vinhedos e Basalto,Serra,Serra
+431520,Putinga,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+431530,Quaraí,10,R 03 - Fronteira Oeste,Centro-Oeste,Fronteira Oeste
+431531,Quatro Irmãos,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+431532,Quevedos,4,R 01 - Verdes Campos,Centro-Oeste,Central
+431535,Quinze de Novembro,9,R 12 - Portal das Missões,Missioneira,Alto Jacuí
+431540,Redentora,15,R 20 - Rota da Produção,Norte,Celeiro
+431545,Relvado,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+431550,Restinga Seca,4,R 01 - Verdes Campos,Centro-Oeste,Jacuí Centro
+431555,Rio dos Índios,11,R 16 - Alto Uruguai Gaúcho,Norte,Médio Alto Uruguai
+431560,Rio Grande,3,R 21 - Região Sul,Sul,Sul
+431570,Rio Pardo,13,R 28 - Vinte e Oito,Vales,Vale do Rio Pardo
+431575,Riozinho,1,R 06 - Vale do Paranhana Costa da Serra,Metropolitana,Paranhana Encosta da Serra
+431580,Roca Sales,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+431590,Rodeio Bonito,19,R 15 - Caminho das Águas,Norte,Médio Alto Uruguai
+431595,Rolador,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+431600,Rolante,1,R 06 - Vale do Paranhana Costa da Serra,Metropolitana,Paranhana Encosta da Serra
+431610,Ronda Alta,15,R 20 - Rota da Produção,Norte,Rio da Várzea
+431620,Rondinha,15,R 20 - Rota da Produção,Norte,Rio da Várzea
+431630,Roque Gonzales,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+431640,Rosário do Sul,10,R 03 - Fronteira Oeste,Centro-Oeste,Fronteira Oeste
+431642,Sagrada Família,15,R 20 - Rota da Produção,Norte,Rio da Várzea
+431643,Saldanha Marinho,9,R 12 - Portal das Missões,Missioneira,Alto Jacuí
+431645,Salto do Jacuí,9,R 12 - Portal das Missões,Missioneira,Alto Jacuí
+431647,Salvador das Missões,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+431650,Salvador do Sul,1,R 08 - Vale do Caí Metropolitana,Metropolitana,Vale do Caí
+431660,Sananduva,6,R 18 - Região das Araucárias,Norte,Nordeste
+431670,Santa Bárbara do Sul,9,R 12 - Portal das Missões,Missioneira,Alto Jacuí
+431673,Santa Cecília do Sul,6,R 18 - Região das Araucárias,Norte,Nordeste
+431675,Santa Clara do Sul,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+431680,Santa Cruz do Sul,13,R 28 - Vinte e Oito,Vales,Vale do Rio Pardo
+431697,Santa Margarida do Sul,10,R 03 - Fronteira Oeste,Centro-Oeste,Fronteira Oeste
+431690,Santa Maria,4,R 01 - Verdes Campos,Centro-Oeste,Central
+431695,Santa Maria do Herval,1,R 07 - Vale dos Sinos,Metropolitana,Paranhana Encosta da Serra
+431720,Santa Rosa,14,R 14 - Fronteira Noroeste,Missioneira,Fronteira Noroeste
+431725,Santa Tereza,5,R 25 - Vinhedos e Basalto,Serra,Serra
+431730,Santa Vitória do Palmar,3,R 21 - Região Sul,Sul,Sul
+431700,Santana da Boa Vista,3,R 21 - Região Sul,Sul,Sul
+431710,Santana do Livramento,10,R 03 - Fronteira Oeste,Centro-Oeste,Fronteira Oeste
+431740,Santiago,4,R 02 - Entre-Rios,Centro-Oeste,Vale do Jaguari
+431750,Santo Ângelo,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+431760,Santo Antônio da Patrulha,18,R 05 - Bons Ventos,Metropolitana,Metropolitano do Delta do Jacuí
+431770,Santo Antônio das Missões,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+431755,Santo Antônio do Palma,6,R 17 - Região do Planalto,Norte,Produção
+431775,Santo Antônio do Planalto,6,R 17 - Região do Planalto,Norte,Produção
+431780,Santo Augusto,17,R 13 - Região da Diversidade,Missioneira,Celeiro
+431790,Santo Cristo,14,R 14 - Fronteira Noroeste,Missioneira,Fronteira Noroeste
+431795,Santo Expedito do Sul,6,R 18 - Região das Araucárias,Norte,Nordeste
+431800,São Borja,12,R 11 -  Sete Povos das Missões,Missioneira,Fronteira Oeste
+431805,São Domingos do Sul,6,R 17 - Região do Planalto,Norte,Produção
+431810,São Francisco de Assis,4,R 02 - Entre-Rios,Centro-Oeste,Vale do Jaguari
+431820,São Francisco de Paula,1,R 06 - Vale do Paranhana Costa da Serra,Metropolitana,Hortênsias
+431830,São Gabriel,10,R 03 - Fronteira Oeste,Centro-Oeste,Fronteira Oeste
+431840,São Jerônimo,2,R 09 - Carbonífera/Costa Doce,Metropolitana,Centro Sul
+431842,São João da Urtiga,6,R 18 - Região das Araucárias,Norte,Nordeste
+431843,São João do Polêsine,4,R 01 - Verdes Campos,Centro-Oeste,Central
+431844,São Jorge,5,R 25 - Vinhedos e Basalto,Serra,Serra
+431845,São José das Missões,15,R 20 - Rota da Produção,Norte,Rio da Várzea
+431846,São José do Herval,16,R 29 - Vales e Montanhas,Vales,Alto da Serra do Botucaraí
+431848,São José do Hortêncio,1,R 07 - Vale dos Sinos,Metropolitana,Vale do Caí
+431849,São José do Inhacorá,14,R 14 - Fronteira Noroeste,Missioneira,Fronteira Noroeste
+431850,São José do Norte,3,R 21 - Região Sul,Sul,Sul
+431860,São José do Ouro,6,R 18 - Região das Araucárias,Norte,Nordeste
+431861,São José do Sul,1,R 08 - Vale do Caí Metropolitana,Metropolitana,Vale do Caí
+431862,São José dos Ausentes,5,R 24 - Campos de Cima da Serra,Serra,Campos de Cima da Serra
+431870,São Leopoldo,1,R 07 - Vale dos Sinos,Metropolitana,Vale do Rio dos Sinos
+431880,São Lourenço do Sul,3,R 21 - Região Sul,Sul,Sul
+431890,São Luiz Gonzaga,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+431900,São Marcos,5,R 26 - Uva e Vale,Serra,Serra
+431910,São Martinho,17,R 13 - Região da Diversidade,Missioneira,Celeiro
+431912,São Martinho da Serra,4,R 01 - Verdes Campos,Centro-Oeste,Central
+431915,São Miguel das Missões,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+431920,São Nicolau,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+431930,São Paulo das Missões,14,R 14 - Fronteira Noroeste,Missioneira,Missões
+431935,São Pedro da Serra,1,R 08 - Vale do Caí Metropolitana,Metropolitana,Vale do Caí
+431936,São Pedro das Missões,15,R 20 - Rota da Produção,Norte,Rio da Várzea
+431937,São Pedro do Butiá,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+431940,São Pedro do Sul,4,R 01 - Verdes Campos,Centro-Oeste,Central
+431950,São Sebastião do Caí,1,R 08 - Vale do Caí Metropolitana,Metropolitana,Vale do Caí
+431960,São Sepé,4,R 01 - Verdes Campos,Centro-Oeste,Jacuí Centro
+431970,São Valentim,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+431971,São Valentim do Sul,16,R 29 - Vales e Montanhas,Vales,Serra
+431973,São Valério do Sul,17,R 13 - Região da Diversidade,Missioneira,Celeiro
+431975,São Vendelino,5,R 26 - Uva e Vale,Serra,Vale do Caí
+431980,São Vicente do Sul,4,R 02 - Entre-Rios,Centro-Oeste,Vale do Jaguari
+431990,Sapiranga,1,R 07 - Vale dos Sinos,Metropolitana,Vale do Rio dos Sinos
+432000,Sapucaia do Sul,1,R 08 - Vale do Caí Metropolitana,Metropolitana,Vale do Rio dos Sinos
+432010,Sarandi,15,R 20 - Rota da Produção,Norte,Rio da Várzea
+432020,Seberi,19,R 15 - Caminho das Águas,Norte,Médio Alto Uruguai
+432023,Sede Nova,17,R 13 - Região da Diversidade,Missioneira,Celeiro
+432026,Segredo,8,R 27 - Jacuí Centro,Vales,Vale do Rio Pardo
+432030,Selbach,9,R 12 - Portal das Missões,Missioneira,Alto Jacuí
+432032,Senador Salgado Filho,14,R 14 - Fronteira Noroeste,Missioneira,Fronteira Noroeste
+432035,Sentinela do Sul,2,R 09 - Carbonífera/Costa Doce,Metropolitana,Centro Sul
+432040,Serafina Corrêa,6,R 17 - Região do Planalto,Norte,Serra
+432045,Sério,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+432050,Sertão,6,R 17 - Região do Planalto,Norte,Norte
+432055,Sertão Santana,2,R 09 - Carbonífera/Costa Doce,Metropolitana,Centro Sul
+432057,Sete de Setembro,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+432060,Severiano de Almeida,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+432065,Silveira Martins,4,R 01 - Verdes Campos,Centro-Oeste,Central
+432067,Sinimbu,13,R 28 - Vinte e Oito,Vales,Vale do Rio Pardo
+432070,Sobradinho,8,R 27 - Jacuí Centro,Vales,Vale do Rio Pardo
+432080,Soledade,6,R 19 - Região do Botucaraí,Norte,Alto da Serra do Botucaraí
+432085,Tabaí,1,R 08 - Vale do Caí Metropolitana,Metropolitana,Vale do Taquari
+432090,Tapejara,6,R 18 - Região das Araucárias,Norte,Nordeste
+432100,Tapera,6,R 19 - Região do Botucaraí,Norte,Alto Jacuí
+432110,Tapes,2,R 09 - Carbonífera/Costa Doce,Metropolitana,Centro Sul
+432120,Taquara,1,R 06 - Vale do Paranhana Costa da Serra,Metropolitana,Paranhana Encosta da Serra
+432130,Taquari,16,R 30 - Vale da Luz,Vales,Vale do Taquari
+432132,Taquaruçu do Sul,19,R 15 - Caminho das Águas,Norte,Médio Alto Uruguai
+432135,Tavares,18,R 05 - Bons Ventos,Metropolitana,Sul
+432140,Tenente Portela,19,R 15 - Caminho das Águas,Norte,Celeiro
+432143,Terra de Areia,18,R 04 - Belas Praias,Metropolitana,Litoral
+432145,Teutônia,16,R 30 - Vale da Luz,Vales,Vale do Taquari
+432146,Tio Hugo,6,R 19 - Região do Botucaraí,Norte,Alto da Serra do Botucaraí
+432147,Tiradentes do Sul,19,R 15 - Caminho das Águas,Norte,Celeiro
+432149,Toropi,4,R 01 - Verdes Campos,Centro-Oeste,Central
+432150,Torres,18,R 04 - Belas Praias,Metropolitana,Litoral
+432160,Tramandaí,18,R 05 - Bons Ventos,Metropolitana,Litoral
+432162,Travesseiro,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+432163,Três Arroios,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+432166,Três Cachoeiras,18,R 04 - Belas Praias,Metropolitana,Litoral
+432170,Três Coroas,1,R 06 - Vale do Paranhana Costa da Serra,Metropolitana,Paranhana Encosta da Serra
+432180,Três de Maio,14,R 14 - Fronteira Noroeste,Missioneira,Fronteira Noroeste
+432183,Três Forquilhas,18,R 04 - Belas Praias,Metropolitana,Litoral
+432185,Três Palmeiras,15,R 20 - Rota da Produção,Norte,Rio da Várzea
+432190,Três Passos,19,R 15 - Caminho das Águas,Norte,Celeiro
+432195,Trindade do Sul,15,R 20 - Rota da Produção,Norte,Médio Alto Uruguai
+432200,Triunfo,1,R 08 - Vale do Caí Metropolitana,Metropolitana,Metropolitano do Delta do Jacuí
+432210,Tucunduva,14,R 14 - Fronteira Noroeste,Missioneira,Fronteira Noroeste
+432215,Tunas,6,R 19 - Região do Botucaraí,Norte,Vale do Rio Pardo
+432218,Tupanci do Sul,6,R 18 - Região das Araucárias,Norte,Nordeste
+432220,Tupanciretã,9,R 12 - Portal das Missões,Missioneira,Central
+432225,Tupandi,1,R 08 - Vale do Caí Metropolitana,Metropolitana,Vale do Caí
+432230,Tuparendi,14,R 14 - Fronteira Noroeste,Missioneira,Fronteira Noroeste
+432232,Turuçu,3,R 21 - Região Sul,Sul,Sul
+432234,Ubiretama,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+432235,União da Serra,5,R 25 - Vinhedos e Basalto,Serra,Serra
+432237,Unistalda,4,R 02 - Entre-Rios,Centro-Oeste,Vale do Jaguari
+432240,Uruguaiana,10,R 03 - Fronteira Oeste,Centro-Oeste,Fronteira Oeste
+432250,Vacaria,5,R 24 - Campos de Cima da Serra,Serra,Campos de Cima da Serra
+432253,Vale do Sol,13,R 28 - Vinte e Oito,Vales,Vale do Rio Pardo
+432254,Vale Real,5,R 26 - Uva e Vale,Serra,Vale do Caí
+432252,Vale Verde,13,R 28 - Vinte e Oito,Vales,Vale do Rio Pardo
+432255,Vanini,6,R 17 - Região do Planalto,Norte,Produção
+432260,Venâncio Aires,13,R 28 - Vinte e Oito,Vales,Vale do Rio Pardo
+432270,Vera Cruz,13,R 28 - Vinte e Oito,Vales,Vale do Rio Pardo
+432280,Veranópolis,5,R 25 - Vinhedos e Basalto,Serra,Serra
+432285,Vespasiano Correa,16,R 29 - Vales e Montanhas,Vales,Vale do Taquari
+432290,Viadutos,11,R 16 - Alto Uruguai Gaúcho,Norte,Norte
+432300,Viamão,2,R 10 - CapitalVale do Gravataí,Metropolitana,Metropolitano do Delta do Jacuí
+432310,Vicente Dutra,19,R 15 - Caminho das Águas,Norte,Médio Alto Uruguai
+432320,Victor Graeff,6,R 17 - Região do Planalto,Norte,Alto da Serra do Botucaraí
+432330,Vila Flores,5,R 25 - Vinhedos e Basalto,Serra,Serra
+432335,Vila Lângaro,6,R 18 - Região das Araucárias,Norte,Nordeste
+432340,Vila Maria,6,R 17 - Região do Planalto,Norte,Produção
+432345,Vila Nova do Sul,4,R 01 - Verdes Campos,Centro-Oeste,Jacuí Centro
+432350,Vista Alegre,19,R 15 - Caminho das Águas,Norte,Médio Alto Uruguai
+432360,Vista Alegre do Prata,5,R 25 - Vinhedos e Basalto,Serra,Serra
+432370,Vista Gaúcha,19,R 15 - Caminho das Águas,Norte,Celeiro
+432375,Vitória das Missões,12,R 11 -  Sete Povos das Missões,Missioneira,Missões
+432377,Westfalia,16,R 30 - Vale da Luz,Vales,Vale do Taquari
+432380,Xangri-lá,18,R 04 - Belas Praias,Metropolitana,Litoral
