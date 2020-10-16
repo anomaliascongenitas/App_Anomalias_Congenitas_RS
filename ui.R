@@ -131,7 +131,7 @@ body <- dashboardBody(
                 valueBoxOutput("box_prevalencia_cid", width = 3)
               ),
               fluidRow(
-                box(h3("Selecione o tipo de agrupamento"),
+                box(h5("Selecione o tipo de agrupamento"),
                     radioButtons("group_regiao_cid",
                                  label = NULL,
                                  choices = list("Municípios" = 1, 
@@ -308,7 +308,7 @@ body <- dashboardBody(
       fluidRow(
         column(
           width = 12,
-          box(h3("Selecione o tipo de agrupamento"),
+          box(h5("Selecione o tipo de agrupamento"),
               radioButtons("group_regiao",
                            label = NULL,
                            choices = list("Municípios" = 1, 
