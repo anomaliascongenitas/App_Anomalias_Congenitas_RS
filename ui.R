@@ -1,7 +1,5 @@
 #library(profvis)
-library(shiny)
-library(shinydashboard)
-library(shinydashboardPlus)
+
 
 
 
@@ -23,22 +21,31 @@ options(OutDec= ".") #Muda de ponto para virgula nos decimais!
 # 
 # write.csv(banco_municipios,file = "banco_municipios.csv",row.names=FALSE)
 
-banco_municipios2 <- read.csv("banco_municipios.csv",encoding = "UTF-8")
+
 anos <- 2010:2018
 limites_contagem <- 253
-limites_prevalencia <- 2223
-cids_values <- c("Microcefalia","Defeitos de Tubo Neural","Fendas orais"
-                 ,"Defeitos de redução de membros/ pé torto/ artrogripose / polidactilia","Sexo indefinido/hipospadia"
-                 ,"Defeitos de parede abdominal","Cardiopatias congênitas","Síndrome de Down")
+limites_prevalencia <- 1300
+cids_values <- c("Cardiopatias congênitas",                                              
+                 "Defeitos de parede abdominal",                                         
+                 "Defeitos de redução de membros/ pé torto/ artrogripose / polidactilia",
+                 "Defeitos de Tubo Neural",                                              
+                 "Fendas orais",                                                         
+                 "hipospadia",                                                           
+                 "Microcefalia",                                                         
+                 "Sexo indefinido",                                                      
+                 "Síndrome de Down")   
 
 
-cids_values2 <- c("Microcefalia – CID Q02",
+
+
+cids_values2 <- c("Cardiopatias congênitas – CID Q20, Q21, Q22, Q23, Q24, Q25, Q26, Q27, Q28",
+                  "Defeitos de parede abdominal – CID Q79.2 Q79.3",
+                  "Defeitos de redução de membros/ pé torto/ artrogripose / polidactilia – CID Q66, Q69, Q71, Q72, Q73 e Q74.3",
                   "Defeitos de Tubo Neural – CID Q00.0, Q00.1, Q00.2, Q01 e Q05",
                   "Fendas orais – CID Q35, Q36 e Q37",
-                  "Defeitos de redução de membros/ pé torto/ artrogripose / polidactilia – CID Q66, Q69, Q71, Q72, Q73 e Q74.3",
-                  "Sexo indefinido/hipospadia - CID  Q54 e Q56",
-                  "Defeitos de parede abdominal – CID Q79.2 Q79.3",
-                  "Cardiopatias congênitas – CID Q20, Q21, Q22, Q23, Q24, Q25, Q26, Q27, Q28",
+                  "hipospadia - CID  Q54",
+                  "Microcefalia – CID Q02",
+                  "Sexo indefinido CID 56",
                   "Síndrome de Down – CID Q90")
 
 
@@ -62,7 +69,7 @@ header <- dashboardHeaderPlus(
 
 rightsidebar <- rightSidebar( icon = "desktop",
   width = 400,
-  h3("Digite as Microrregiões de saúde de interesse"),
+  h3("Digite as Macrorregiões de saúde de interesse"),
   selectizeInput("filtro_geral",
                  label = NULL,
                  choices = macro_saude_shape$macroregiao,
@@ -99,7 +106,7 @@ body <- dashboardBody(
     tabItem("mapa_cid",
             fluidPage(
               
-              titlePanel("Mapa da prevalência ao nascimento considerandos os cids e o ano selecionados"),
+              titlePanel("Mapa da prevalência ao nascimento considerandos os grupos de CIDs, ano e macrorregiões de saúde selecionados"),
               fluidRow(column(
                 6,
                 selectizeInput(
@@ -119,9 +126,9 @@ body <- dashboardBody(
               
               fluidRow(
                 box(title = "",
-                    checkboxGroupInput("checkbox_cid", "Escolha o(s) grupo(s) CID(s):", selected = 7,
-                                       choiceNames = cids_values2[c(7, 6, 4, 2, 3, 1, 5, 8)],
-                                       choiceValues = c(7, 6, 4, 2, 3, 1, 5, 8)),
+                    checkboxGroupInput("checkbox_cid", "Escolha o(s) grupo(s) CID(s):", selected = 1,
+                                       choiceNames = cids_values2,
+                                       choiceValues = 1:9),
                     background = "blue",width = 12)
               ),  
               
@@ -136,26 +143,26 @@ body <- dashboardBody(
                                  label = NULL,
                                  choices = list("Municípios" = 1, 
                                                 #"Mesorregiões" = 2,
-                                                "Microrregiões de saúde"=3),
+                                                "Macrorregiões de saúde"=3),
                                  selected = 1,
                                  inline = T),
-                    title="Mapa das prevalências ao nascimento de anômalias congênitas dos CID e ano selecionados",
+                    title="Mapa das prevalências ao nascimento de anômalias congênitas considerando os grupos de CIDs, ano e macrorregiões de saúde selecionados",
                     background = "blue",
                     width = 12,
-                    leafletOutput("grafico_mapa_proporcao_cid", height = "700px")
+                    leafletOutput("grafico_mapa_proporcao_cid", height = "700px"),collapsible = TRUE
                 )
               ),
               fluidRow(
-                box(title = "Gráfico de barras dos 20 municipios com maior prevalencia",
+                box(title = "Gráfico de barras dos 20 municipios com maior prevalencia considerando os grupos de CIDs, ano e macrorregiões de saúde selecionados",
                     width = 6,
                     background = "blue",
-                    plotlyOutput("grafico_barras_cid")
+                    plotlyOutput("grafico_barras_cid"),collapsible = TRUE
                     
                 ),
-                box(title = "Serie temporal da prevalência ao nascimento  dos CID e ano selecionados",
+                box(title = "Serie temporal da prevalência ao nascimento considerando os grupos de CIDs e macrorregiões de saúde selecionados",
                     width = 6,
                     background =  "blue",
-                    plotlyOutput("grafico_serie_cid")
+                    plotlyOutput("grafico_serie_cid"),collapsible = TRUE
                 )
               ), 
               # fluidRow(
@@ -186,28 +193,25 @@ body <- dashboardBody(
               
               
               fluidRow(
-                column(
-                  
+                
                   box(
-                    title = "Gráfico da evolução da prevalência ao nascimento considerando o(s) CID selecionado(s)",
+                    title = "Gráfico de densidade da prevalência ao nascimento ao longo dos anos considerando os grupos de CIDs, ano e macrorregiões de saúde selecionados",
                     background = "blue",
                     sliderInput("limite_dots_cid",
                                 "Limites do eixo vertical",
                                 min = 0,
                                 max = limites_prevalencia,
-                                value = c(0,500),
+                                value = c(0,limites_prevalencia),
                                 step = 1),
                     plotlyOutput("plot_dots_cid"),
-                    width = 12
-                  ),width = 12
-                )),
+                    width = 12,collapsible = TRUE
+                  )
+                ),
               
               
               fluidRow(
-                column(
-                  
                   box(
-                    title = "Gráfico da evolução da prevalência ao nascimento considerando o(s) CID selecionado(s)",
+                    title = "Gráfico da evolução da prevalência ao nascimento considerando os grupos de CIDs e macrorregiões de saúde selecionados",
                     # selectizeInput("input_quadradinhos_cid",
                     #                label = "Escolha o(s) município(s)",
                     #                choices = unique(banco_municipios2$NOMEMUN),
@@ -217,27 +221,27 @@ body <- dashboardBody(
                     background = "blue",
                     htmlOutput("input_quadradinhos_html_cid"),
                     plotlyOutput("plot_quadradinhos_cid"),
-                    width = 12
-                  ),width = 12
-                )),
+                    width = 12,collapsible = TRUE
+                  )
+                ),
               
               fluidRow(
-                column(
+                
                   
                   box(
-                    title = "Gráfico de Área do Número de nascidos vivos com anomalia por grupo de CID",
+                    title = "Gráfico de Área do Número de nascidos vivos com anomalia congênita por grupo de CID considerando os grupos de CIDs e macrorregiões de saúde selecionados",
                     background = "blue",
                     plotlyOutput("plot_area_chart_cid"),
-                    width = 12
-                  ),width = 12
-                )),
+                    width = 12,collapsible = TRUE
+                  )
+                ),
               
               
               
               
               
               fluidRow(
-                column(h2("Tabela de prevalência ao nascimento agrupada por cada grupo de CID"),
+                column(h2("Tabela de prevalência ao nascimento agrupada por cada grupo de CID considerando as macrorregiões de saúde selecionadas"),
                        width = 12,dataTableOutput("tabela_cid_1", height = 500),
                        downloadButton("downloadData_cid_1", "Download Tabela de dados"),
                        HTML("<br><br><br>")
@@ -262,7 +266,7 @@ body <- dashboardBody(
               
               ,
               fluidRow(
-                column(h2("Tabela de prevalência ao nascimento com apenas os grupos de CID's selecionados"),
+                column(h2("Tabela de prevalência ao nascimento com apenas os grupos de CID's e macrorregiões de saúde selecionados"),
                        width = 12,
                        dataTableOutput("tabela_cid_2", height = 500),
                        downloadButton("downloadData_cid_2", "Download Tabela de dados"),
@@ -313,10 +317,10 @@ body <- dashboardBody(
                            label = NULL,
                            choices = list("Municípios" = 1, 
                                           #"Mesorregiões" = 2,
-                                          "Microrregiões de saúde"=3),
+                                          "Macrorregiões de saúde"=3),
                            selected = 1,
                            inline = T),
-            title ="Mapa das prevalências ao nascimento de anômalias congênitas no ano selecionado",
+            title ="Mapa das prevalências ao nascimento de anômalias congênitas considerando o ano e macrorregiões de saúde selecionados",
             #h1("Mapa das prevalencias de anomalias congenitas no ano selecionado"),
             #h4("Dados provenientes da Pre"),
             leafletOutput("grafico_mapa_proporcao", height = "700px"),
@@ -329,7 +333,7 @@ body <- dashboardBody(
         column(
           width = 6,
           box(
-            title = "Gráfico de barras dos 20 municípios com maior prevalência ao nascimento no ano selecionado",
+            title = "Gráfico de barras dos 20 municípios com maior prevalência ao nascimento considerando o ano e macrorregiões de saúde selecionados",
             background = "blue",
             plotlyOutput("prevalencia_barras"),
             width = 12
@@ -338,7 +342,7 @@ body <- dashboardBody(
         column(
           width = 6,
           box(
-            title = "Série Temporal Prevalência ao nascimento considerando todo o RS e todos os anos",
+            title = "Série Temporal Prevalência ao nascimento considerando as macrorregiões de saúde selecionadas",
             background = "blue",
             plotlyOutput("prevalencia_serie"),
             width = 12
@@ -353,7 +357,7 @@ body <- dashboardBody(
         column(
           width = 6,
           box(
-            title = "Boxplot da prevalência ao nascimento separado pelo ano",
+            title = "Boxplot da prevalência ao nascimento separado por ano considerando as macrorregiões de saúde selecionadas",
             background = "blue",
             sliderInput("limite_boxplot1",
                         "Limites do eixo vertical",
@@ -418,7 +422,7 @@ body <- dashboardBody(
           width = 12,
           box(
             title = "Gráfico da evolução das prevalências ao nascimento por 10.000 
-              dos 20 municipios com maior número de nascidos vivos no RS",
+              dos 20 municipios com maior número de nascidos vivos no RS considerando apenas as macrorregiões de saúde selecionadas",
             background = "blue",
             # selectizeInput("input_quadradinhos",
             #                label = "Escolha o(s) município(s)",
@@ -485,7 +489,7 @@ body <- dashboardBody(
         column(
           width = 12,
           box(
-            title ="Mapa do número de nascidos vivos com anomalias congênitas no ano selecionado",
+            title ="Mapa do número de nascidos vivos com anomalias congênitas considerando apenas o ano e as macrorregiões de saúde selecionados",
             #h1("Mapa das prevalencias de anomalias congenitas no ano selecionado"),
             #h4("Dados provenientes da Pre"),
             leafletOutput("mapa_n_casos", height = "700px"),
@@ -498,7 +502,7 @@ body <- dashboardBody(
         column(
           width = 6,
           box(
-            title = "Gráfico de barras dos 20 municípios com maior número de nascidos vivos com anomalias congenitas no ano selecionado",
+            title = "Gráfico de barras dos 20 municípios com maior número de nascidos vivos com anomalias congenitas no ano selecionado considerando apenas as macrorregiões de saúde selecionadas",
             background = "blue",
             plotlyOutput("n_casos_barras"),
             width = 12
@@ -507,7 +511,7 @@ body <- dashboardBody(
         column(
           width = 6,
           box(
-            title = "Série Temporal do número total de nascidos vivos com anomalias congênitas considerando todo o RS e todos os anos",
+            title = "Série Temporal do número total de nascidos vivos com anomalias congênitas considerando apenas as macrorregiões de saúde selecionadas e todos os anos",
             background = "blue",
             plotlyOutput("n_casos_serie"),
             width = 12
@@ -520,7 +524,7 @@ body <- dashboardBody(
           width = 12,
           box(
             title = "Gráfico da evolução do número de nascidos com anomalias
-              20 municipios com maior número de nascidos vivos no RS",
+              20 municipios com maior número de nascidos vivos no RS considerando apenas as macrorregiões de saúde selecionadas",
             # selectizeInput("input_quadradinhos_casos",
             #                label = "Escolha o(s) município(s)",
             #                choices = unique(banco_municipios2$NOMEMUN),
@@ -569,7 +573,7 @@ body <- dashboardBody(
         column(
           width = 12,
           box(
-            title ="Mapa dos número de nascidos vivos no ano selecionado",
+            title ="Mapa dos número de nascidos vivos no ano selecionado considerando apenas o ano e as macrorregiões de saúde selecionados",
             #h1("Mapa das prevalencias de anomalias congenitas no ano selecionado"),
             #h4("Dados provenientes da Pre"),
             leafletOutput("mapa_pop", height = "700px"),
@@ -583,7 +587,7 @@ body <- dashboardBody(
         column(
           width = 6,
           box(
-            title = "Gráfico de barras dos 20 munucípios com maior número de nascidos vivos no ano selecionado",
+            title = "Gráfico de barras dos 20 munucípios com maior número de nascidos vivos no ano selecionado considerando apenas as macrorregiões de saúde selecionadas",
             background = "blue",
             plotlyOutput("pop_barras"),
             width = 12
@@ -592,7 +596,7 @@ body <- dashboardBody(
         column(
           width = 6,
           box(
-            title = "Série Temporal do número total de nascidos vivos considerando todo o RS e todos os anos",
+            title = "Série Temporal do número total de nascidos vivos considerando apenas as macrorregiões de saúde selecionadas e todos os anos",
             background = "blue",
             plotlyOutput("pop_serie"),
             width = 12
@@ -604,7 +608,7 @@ body <- dashboardBody(
         column(
           width = 12,
           box(
-            title = "Gráfico da evolução do número de nascidos vivos no RS",
+            title = "Gráfico da evolução do número de nascidos vivos considerando apenas as macrorregiões de saúde selecionadas",
             # selectizeInput("input_quadradinhos_pop",
             #                label = "Escolha o(s) município(s)",
             #                choices = unique(banco_municipios2$NOMEMUN),
@@ -782,9 +786,9 @@ body <- dashboardBody(
             
             fluidRow(
               box(title = "",
-                  radioButtons("cid_scan", "Escolha o grupo de Anomalias para a Estatística Scan", selected = 7,
-                                     choiceNames  = cids_values2[c(7, 6, 4, 2, 3, 1, 5, 8)],
-                                     choiceValues = c(7, 6, 4, 2, 3, 1, 5, 8)),
+                  radioButtons("cid_scan", "Escolha o grupo de CID para a Estatística Scan", selected = 7,
+                                     choiceNames  = cids_values2,
+                                     choiceValues = 1:9),
                   background = "blue",width = 12)
             ),
             fluidRow(
@@ -801,6 +805,24 @@ body <- dashboardBody(
               background = "blue",width = 12)
             ),
             
+            
+            fluidRow(
+              column(width = 2),
+              column(align="center",
+                     width = 8,
+                     box(
+                       title ="Mapa com o Cluster detectado pela Estatística Scan",
+                       #h1("Mapa das prevalencias de anomalias congenitas no ano selecionado"),
+                       #h4("Dados provenientes da Pre"),
+                       plotOutput("mapa_scan_cluster", height = "500px"),br(),
+                       textOutput("scan_cluster_texto"),br(),
+                       #HTML("<br><br><br>"),
+                       width = 12,
+                       background = "blue",collapsible = TRUE
+                     )
+              ),column(width = 2)
+            ),
+            
             fluidRow(
               column(
                 width = 12,
@@ -813,24 +835,9 @@ body <- dashboardBody(
                   width = 12,
                   background = "blue",collapsible = TRUE
                 )
-              )),
+              ))
             
-            fluidRow(
-              column(width = 2),
-              column(align="center",
-                width = 8,
-                box(
-                  title ="Mapa com o Cluster detectado pela Estatítica Scan",
-                  #h1("Mapa das prevalencias de anomalias congenitas no ano selecionado"),
-                  #h4("Dados provenientes da Pre"),
-                  plotOutput("mapa_scan_cluster", height = "500px"),br(),
-                  textOutput("scan_cluster_texto"),br(),
-                  #HTML("<br><br><br>"),
-                  width = 12,
-                  background = "blue",collapsible = TRUE
-                )
-              ),column(width = 2)
-              )
+           
             
             
   )),

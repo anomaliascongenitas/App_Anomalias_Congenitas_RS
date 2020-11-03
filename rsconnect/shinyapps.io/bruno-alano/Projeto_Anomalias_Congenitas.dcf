@@ -5,9 +5,9 @@ account: bruno-alano
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2656984
-bundleId: 3749273
+bundleId: 3812548
 url: https://bruno-alano.shinyapps.io/Projeto_anomalias_congenitas/
-when: 1602861595.28891
+when: 1604350251.07394
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: pacotes.R|README.md|scan_app.R
+ignoredFiles: .gitattributes|banco_manipulacao.R|I_de_moran_gerando_estatisticas.R|macro_saude_testes.R|pacotes.R|README.md|scan_app.R

@@ -1,0 +1,13 @@
+name: App_anomalias_rs
+title: App_anomalias_rs
+username:
+account: bruno-alano
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2657413
+bundleId: 3812784
+url: https://bruno-alano.shinyapps.io/App_anomalias_rs/
+when: 1604353577.40903
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .gitattributes|banco_manipulacao.R|I_de_moran_gerando_estatisticas.R|macro_saude_testes.R|pacotes.R|README.md|scan_app.R
