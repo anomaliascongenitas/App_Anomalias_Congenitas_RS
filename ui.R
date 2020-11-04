@@ -786,7 +786,7 @@ body <- dashboardBody(
             
             fluidRow(
               box(title = "",
-                  radioButtons("cid_scan", "Escolha o grupo de CID para a Estatística Scan", selected = 7,
+                  radioButtons("cid_scan", "Escolha o grupo de CID para a Estatística Scan", selected = 1,
                                      choiceNames  = cids_values2,
                                      choiceValues = 1:9),
                   background = "blue",width = 12)
