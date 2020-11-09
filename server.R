@@ -213,8 +213,10 @@ server <- function(input, output,session) {
   
   datasetInputcid_min <- reactive({
     
-    
-  
+    # banco_aux <- banco_2019 %>%
+    #   group_by(NUMERODN) %>%
+    #   summarise(ANO_NASC = unique(ANO_NASC),CODMUNRES = unique(CODMUNRES))
+    # 
     
     banco_aux <- banco_cid %>%
       filter(CODMUNRES %in% macro_saude_filtro(), ANO_NASC != 2019) %>%
@@ -231,7 +233,7 @@ server <- function(input, output,session) {
       summarise(total_nascidos_vivos = sum(numero_nascidos_vivos))
     
     
-    banco_aux2[,2:10] <- banco_aux2[,2:10]/matrix(rep(banco_aux3$total_nascidos_vivos,each= 8),ncol = 9,byrow = F)*10^4
+    banco_aux2[,2:10] <- banco_aux2[,2:10]/matrix(rep(banco_aux3$total_nascidos_vivos,each= 9),ncol = 9,byrow = F)*10^4
     banco_aux2
     
     
@@ -465,6 +467,9 @@ server <- function(input, output,session) {
           escala <- c(0,unique(c(primeira_parte_escala,segunda_parte_escala,terceira_parte_escala)))
           
           #pal <- colorBin("plasma", domain = dataset$variavel, bins = bins_defalt$brks)
+          
+          
+          
           
           pal <- colorBin("plasma", domain = dataset$variavel, bins = escala)
           #"YlOrRd"
@@ -825,7 +830,7 @@ server <- function(input, output,session) {
           geom_area(alpha=0.6 , size=.5, colour="white") +
           scale_fill_viridis(discrete = T,direction = -1) +
           theme_ipsum() +
-          labs(x="Ano nascimento",y="Número de Nascidos vivos com anomalia") +
+          labs(x="Ano nascimento",y="Número de Nascidos vivos com anomalia por grupo de anomalia") +
           scale_x_continuous(breaks=2010:2019,labels=2010:2019)
         
         ggplotly(p)
