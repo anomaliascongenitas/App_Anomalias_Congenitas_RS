@@ -52,7 +52,7 @@ banco_i_moran <- st_transform(banco_i_moran, "+init=epsg:4326") ##leaflet
 library(spdep)
 
 banco_i_moran_matriz = banco_i_moran %>%
-                        filter(ANO_NASC == 2018)
+                        filter(ANO_NASC == 2019)
 
 w <- poly2nb(banco_i_moran_matriz$geometry, row.names = banco_i_moran_matriz$municipio)
 ww <-  nb2listw(w, style = 'B') #faz a matriz de pesos 0 ou 1
@@ -62,7 +62,7 @@ banco_moran = banco_i_moran %>% filter(ANO_NASC == 2010)
 moran_2010=moran.mc(banco_moran$prevalencia, ww, nsim = 99999)
 valores_teste=c(moran_2010$statistic[[1]], moran_2010$p.value, 2010) 
 
-for (i in 2011:2018){
+for (i in 2011:2019){
   aux_banco_i_moran = banco_i_moran %>%
                         filter(ANO_NASC == i)        
   moran_teste = moran.mc(aux_banco_i_moran$prevalencia, ww, nsim = 9999)

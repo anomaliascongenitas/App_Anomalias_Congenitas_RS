@@ -22,7 +22,7 @@ options(OutDec= ".") #Muda de ponto para virgula nos decimais!
 # write.csv(banco_municipios,file = "banco_municipios.csv",row.names=FALSE)
 
 
-anos <- 2010:2018
+anos <- 2010:2019
 limites_contagem <- 253
 limites_prevalencia <- 1300
 cids_values <- c("Cardiopatias congênitas",                                              
@@ -113,7 +113,7 @@ body <- dashboardBody(
                   "ano_grafico_cid",
                   label = "Escolha o ano a ser considerado",
                   choices = anos,
-                  selected = "2018"
+                  selected = "2019"
                 ),h4("O ícone no canto superior direito seleciona quais as macrorregiões de saúde do RS serão apresentadas")),
                 column(
                   width = 6,
@@ -294,7 +294,7 @@ body <- dashboardBody(
           "ano_grafico",
           label = "Escolha o ano a ser considerado",
           choices = anos,
-          selected = "2018"
+          selected = "2019"
         ),h4("O ícone no canto superior direito seleciona quais as macrorregiões de saúde do RS serão apresentadas")),
         column(
           width = 6,
@@ -469,7 +469,7 @@ body <- dashboardBody(
           "ano_grafico_casos",
           label = "Escolha o ano a ser considerado",
           choices = anos,
-          selected = "2018"
+          selected = "2019"
         ),h4("O ícone no canto superior direito seleciona quais as macrorregiões de saúde do RS serão apresentadas")),
         column(
           width = 6,
@@ -553,7 +553,7 @@ body <- dashboardBody(
           "ano_grafico_pop",
           label = "Escolha o ano a ser considerado",
           choices = anos,
-          selected = "2018"
+          selected = "2019"
         ),h4("O ícone no canto superior direito seleciona quais as macrorregiões de saúde do RS serão apresentadas")),
         column(
           width = 6,

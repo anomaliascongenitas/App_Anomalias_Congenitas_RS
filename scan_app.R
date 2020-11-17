@@ -26,9 +26,9 @@ gerar_banco_modelo_aux <- function(cid2){
   
   
   banco_aux2 <- banco_aux2 %>%
-    replace_na(list(nascidos_vivos_anomalia = 0)) %>%
+    replace_na(list(nascidos_vivos_anomalia = 0))
     #mutate(prevalencia = nascidos_vivos_anomalia/numero_nascidos_vivos*10^4) %>%
-    select(1,4,NOMEMUN = NOMEMUN,5,nascidos_vivos_anomalia = nascidos_vivos_anomalia)
+    #select(NOMEMUN = NOMEMUN,numero_nascidos_vivos,nascidos_vivos_anomalia)
   
   linha_pinto_bandeira  <- banco_aux2[banco_aux2$NOMEMUN == "Pinto Bandeira",]
   num_linha_bento_goncalves <- which(banco_aux2$NOMEMUN == "Bento Gonçalves")
@@ -62,11 +62,11 @@ lista_completa <- list()
 
 
 for (i in 1:9) {
-  banco_modelo <- gerar_banco_modelo_aux(i)
+  banco_modelo <- gerar_banco_modelo_aux(1)
   
   
   counts <- banco_modelo  %>% 
-    select(1,2,5) %>%
+    select(1,3,5) %>%
     df_to_matrix(time_col = "ANO_NASC", location_col = "CODMUNRES", value_col = "nascidos_vivos_anomalia")
   
   

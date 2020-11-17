@@ -43,12 +43,7 @@ localarquivo <- function(x){
 ################
 ################################################################################
 
-banco_nascimentos <- read_excel(localarquivo("DNRS201018_selected_17-jul-2020.xlsx")) %>%
-  pivot_longer(c(3: 11), names_to = "ANO_NASC", values_to = "numero_nascidos_vivos")%>%
-  filter(complete.cases(.)) %>%
-  filter(CODMUNRES != 430000) %>%
-  mutate(CODMUNRES = as.numeric(CODMUNRES))  %>%
-  mutate(ANO_NASC = as.numeric(ANO_NASC)) ## Municipio ignorado
+banco_nascimentos <- utils::read.csv2("banco_nascimentos.csv") ## Municipio ignorado
 
 
 ### Cuidado pois o número de linhas e colunas dessa tabela foi fixado, qualquer mudança e o valor deverá ser alterado! ###
@@ -241,10 +236,11 @@ teste_moran <- read.table(localarquivo("teste_moran_rs.txt"), quote="\"", commen
 names(teste_moran)=c("estatistica_teste", "p_valor", "ano_teste")
 #####################################################################################################
 
-top_20_munic <- banco_anomalias_analise %>%
-  filter(ANO_NASC == 2018) %>%
-  arrange(Total) %>%
-  top_n(20, numero_nascidos_vivos) %>%
+top_20_munic <- banco_nascimentos %>%
+  group_by(NOMEMUN) %>%
+  summarise(Total = sum(numero_nascidos_vivos)) %>%
+  arrange(desc(Total)) %>%
+  top_n(20, Total) %>%
   select(NOMEMUN)
 
 tabela_box <- banco_anomalias_analise %>%
