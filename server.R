@@ -1,4 +1,17 @@
 
+
+library(shiny)
+library(shinydashboard)
+library(shinydashboardPlus)
+
+# 
+# localarquivo <- function(x){
+#   str_c(here::here(),"/",x)
+# }
+# 
+# 
+# source(localarquivo("global.r"),encoding = "UTF-8")
+
 server <- function(input, output,session) {
     
      

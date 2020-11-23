@@ -23,7 +23,7 @@ library(sf)
 library(ps)
 library(spdep) #######?###########
 library(kableExtra)
-
+#library(here)
 library(viridis)
 
 #library(haven)
@@ -43,7 +43,10 @@ localarquivo <- function(x){
 ################
 ################################################################################
 
-banco_nascimentos <- utils::read.csv2("banco_nascimentos.csv") ## Municipio ignorado
+banco_nascimentos <- utils::read.csv(localarquivo("banco_nascimentos.csv"), encoding="UTF-8"
+                                      # locale("br",encoding = "UTF-8")
+                                       
+                                     ) ## Municipio ignorado
 
 
 ### Cuidado pois o número de linhas e colunas dessa tabela foi fixado, qualquer mudança e o valor deverá ser alterado! ###
@@ -255,33 +258,10 @@ tabela_box <- banco_anomalias_analise %>%
 
 
 
-mapa_rs_meso <- sf::st_read(localarquivo("shapefiles/rs_mesorregioes/RS_Mesorregioes_2019.shp"), quiet = TRUE) %>%
-  mutate(meso= str_to_lower(NM_MESO))
-linha_lagoa_dos_patos2 =  which(mapa_rs_meso$meso=="lagoa dos patos") 
-linha_lagoa_mirin2 =  which(mapa_rs_meso$meso=="lagoa mirim")
-mapa_rs_meso = mapa_rs_meso[-c(linha_lagoa_dos_patos2, linha_lagoa_mirin2), ]
-
-base_mesoregiao <- read.csv(localarquivo("mesoregiao.csv"))
 
 
 
 
-
-
-
-
-
-
-
-
-banco_meso_analise_aux <- banco_anomalias_analise  %>%
-  merge(.,base_mesoregiao,by.x=c("CODMUNRES"),by.y = c("IBGE"))
-
-banco_meso_analise <- banco_meso_analise_aux %>%
-  group_by(IBGE_meso,Nome_Mesoregiao,ANO_NASC) %>%
-  summarise(numero_nascidos_vivos = sum(numero_nascidos_vivos), nascidos_vivos_anomalia = sum(nascidos_vivos_anomalia),
-            prevalencia = nascidos_vivos_anomalia/numero_nascidos_vivos*10^4) %>%
-  ungroup() 
 
 
 #remove(banco_meso_analise_aux,banco_anomalias)
