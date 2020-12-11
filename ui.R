@@ -45,7 +45,7 @@ cids_values2 <- c("Cardiopatias congênitas – CID Q20, Q21, Q22, Q23, Q24, Q25
                   "Fendas orais – CID Q35, Q36 e Q37",
                   "hipospadia - CID  Q54",
                   "Microcefalia – CID Q02",
-                  "Sexo indefinido CID 56",
+                  "Sexo indefinido CID Q56",
                   "Síndrome de Down – CID Q90")
 
 

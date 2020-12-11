@@ -1,17 +1,4 @@
 
-
-library(shiny)
-library(shinydashboard)
-library(shinydashboardPlus)
-
-# 
-# localarquivo <- function(x){
-#   str_c(here::here(),"/",x)
-# }
-# 
-# 
-# source(localarquivo("global.r"),encoding = "UTF-8")
-
 server <- function(input, output,session) {
     
      
@@ -528,6 +515,7 @@ server <- function(input, output,session) {
                         labelOptions = labelOptions(
                           style = list("font-weight" = "normal", padding = "6px 11px"),
                           textsize = "13px",
+                          opacity = 0.75,
                           direction = "bottom")) %>%
       #       htmlwidgets::onRender("
       # function(el, x) {
@@ -601,7 +589,7 @@ server <- function(input, output,session) {
           dataset <- aux
           limites <- c(round(min(dataset$variavel),0)-1,round(max(dataset$variavel),0)+1)
           
-          pal <- colorBin("YlOrRd", domain = dataset$variavel, bins = seq(limites[1],limites[2],length.out = 6))
+          pal <- colorBin("plasma", domain = dataset$variavel, bins = seq(limites[1],limites[2],length.out = 6))
           
           pal2 <- function(x){
             ifelse(x==0,"#808080",pal(x))
@@ -635,6 +623,7 @@ server <- function(input, output,session) {
                         labelOptions = labelOptions(
                           style = list("font-weight" = "normal", padding = "6px 11px"),
                           textsize = "13px",
+                          opacity = 0.75,
                           direction = "bottom")) %>%
             leaflet::addLegend(pal = pal, values = ~tidy$variavel, opacity = 0.7, title = "Prevalência ao nascimento",
                                labFormat = labelFormat(digits = 3),
@@ -668,7 +657,7 @@ server <- function(input, output,session) {
         names(aux)[3] = c("municipio")
         
         plot_barras <- ggplot(aux, aes(x = municipio, y = prevalencia)) +
-          geom_col(fill = "darkmagenta") +
+          geom_col(fill = "darkmagenta", alpha = 0.6) +
           labs(x = "Município", y = "Prevalência ao nascimento") +
           #labs(x = "Municipio", y = "Gráfico das 20 cidades com maiores valores de Prevalencia por 10000") +
           scale_x_discrete(limits = ordem) +
@@ -694,8 +683,8 @@ server <- function(input, output,session) {
         names(aux)[1] = "ano"
         
         plotar = ggplot(aux) +
-          geom_point(aes(x = ano, y = prevalencia), color = "darkmagenta") +
-          geom_line(aes(x = ano, y = prevalencia, group = 1), color = "darkmagenta") +
+          geom_point(aes(x = ano, y = prevalencia), color = "darkmagenta", alpha = 0.6) +
+          geom_line(aes(x = ano, y = prevalencia, group = 1), color = "darkmagenta", alpha = 0.6) +
           #geom_text(aes(x = ano,y = media, label = round(media,3))) +
           #scale_x_discrete(limits = ordem) +
           labs(x = "Ano", y = "Prevalência ao nascimento") +
@@ -766,11 +755,12 @@ server <- function(input, output,session) {
       
 
       grafico <- ggplot(banco, aes(y = prevalencia, x = ano,fill = ano)) +
-        geom_violin(position = position_dodge(width = 0.9)
+        geom_violin(position = position_dodge(width = 0.9),
                     #,
                     #text=sprintf(" %s <br>Prevalências ao nascimento: %s <br>Ano: %s", banco$NOMEMUN,round(banco$prevalencia,3),banco$ano)
-                    ) +
-        geom_quasirandom(dodge.width = 0.2, varwidth = TRUE,mapping = aes(text=sprintf(" %s <br>Prevalências ao nascimento: %s <br>Ano: %s", NOMEMUN,round(prevalencia,3),ano))) +
+                    alpha = 0.5) +
+        geom_quasirandom(dodge.width = 0.2, varwidth = TRUE,mapping = 
+                           aes(text=sprintf(" %s <br>Prevalências ao nascimento: %s <br>Ano: %s", NOMEMUN,round(prevalencia,3),ano)), alpha = 0.6) +
         ylim( input$limite_dots_cid) +
         scale_fill_manual(values = rep("darkmagenta",10))
       
@@ -1003,6 +993,7 @@ server <- function(input, output,session) {
                       labelOptions = labelOptions(
                         style = list("font-weight" = "normal", padding = "6px 11px"),
                         textsize = "13px",
+                        opacity = 0.75,
                         direction = "bottom")) %>%
           leaflet::addLegend(pal = pal, values = ~tidy$variavel, opacity = 0.7, title = "Prevalência ao nascimento",
                              labFormat = labelFormat(digits = 3),
@@ -1111,6 +1102,7 @@ server <- function(input, output,session) {
                       labelOptions = labelOptions(
                         style = list("font-weight" = "normal", padding = "6px 11px"),
                         textsize = "13px",
+                        opacity = 0.75,
                         direction = "bottom")) %>%
           leaflet::addLegend(pal = pal, values = ~tidy$variavel, opacity = 0.7, title = "Prevalência ao nascimento",
                              labFormat = labelFormat(digits = 3),
@@ -1208,6 +1200,7 @@ server <- function(input, output,session) {
                 labelOptions = labelOptions(
                     style = list("font-weight" = "normal", padding = "6px 11px"),
                     textsize = "13px",
+                    opacity = 0.75,
                     direction = "bottom")) %>%
             leaflet::addLegend(
                 pal = pal,
@@ -1243,7 +1236,7 @@ server <- function(input, output,session) {
         names(aux)[1] = c("município")
         
         plot_barras <- ggplot(aux, aes(x = município, y = prevalencia)) +
-            geom_col(fill = "darkmagenta") +
+            geom_col(fill = "darkmagenta", alpha = 0.6) +
             labs(x = "Município", y = "Prevalência ao nascimento") +
             #labs(x = "Municipio", y = "Gráfico das 20 cidades com maiores valores de Prevalencia por 10000") +
             scale_x_discrete(limits = ordem) +
@@ -1270,8 +1263,8 @@ server <- function(input, output,session) {
         names(aux)[1] = "ano"
         
         plotar = ggplot(aux) +
-            geom_point(aes(x = ano, y = prevalencia), color = "darkmagenta") +
-            geom_line(aes(x = ano, y = prevalencia, group = 1), color = "darkmagenta") +
+            geom_point(aes(x = ano, y = prevalencia), color = "darkmagenta", alpha = 0.6) +
+            geom_line(aes(x = ano, y = prevalencia, group = 1), color = "darkmagenta", alpha = 0.6) +
             #geom_text(aes(x = ano,y = media, label = round(media,3))) +
             #scale_x_discrete(limits = ordem) +
             labs(x = "Ano", y = "Média Prevalência ao nascimento") +
@@ -1471,6 +1464,7 @@ server <- function(input, output,session) {
                         labelOptions = labelOptions(
                             style = list("font-weight" = "normal", padding = "6px 11px"),
                             textsize = "13px",
+                            opacity = 0.75,
                             direction = "bottom")) %>%
             leaflet::addLegend(pal = pal, values = ~tidy$variavel, opacity = 0.7, 
                       title = "N nascidos vivos c/ anomalias",
@@ -1500,7 +1494,7 @@ server <- function(input, output,session) {
         names(aux)[1] = c("município")
         
         plot_barras <- ggplot(aux, aes(x = município, y = nascidos_vivos_anomalia)) +
-            geom_col(fill = "red2") +
+            geom_col(fill = "red2", alpha = 0.6) +
             labs(x = "Município", y = "Prevalência ao nascimento") +
             #labs(x = "Municipio", y = "Gráfico das 20 cidades com maiores valores de Prevalencia por 10000") +
             scale_x_discrete(limits = ordem) +
@@ -1526,8 +1520,8 @@ server <- function(input, output,session) {
         names(aux)[1] = "ano"
         
         plotar = ggplot(aux) +
-            geom_point(aes(x = ano, y = total), color = "red2") +
-            geom_line(aes(x = ano, y = total, group = 1), color = "red2") +
+            geom_point(aes(x = ano, y = total), color = "red2", alpha = 0.6) +
+            geom_line(aes(x = ano, y = total, group = 1), color = "red2", alpha = 0.6) +
             #geom_text(aes(x = ano,y = media, label = round(media,3))) +
             #scale_x_discrete(limits = ordem) +
             labs(x = "Ano", y = "Número de nascidos vivos com anomalias congênitas") +
@@ -1633,7 +1627,7 @@ server <- function(input, output,session) {
         names(aux)[1] = c("município")
         
         plot_barras <- ggplot(aux, aes(x = município, y = numero_nascidos_vivos)) +
-            geom_col(fill = "red2") +
+            geom_col(fill = "red2", alpha = 0.5) +
             labs(x = "Município", y = "numero_nascidos_vivos") +
             #labs(x = "Municipio", y = "Gráfico das 20 cidades com maiores valores de Prevalencia por 10000") +
             scale_x_discrete(limits = ordem) +
@@ -1660,8 +1654,8 @@ server <- function(input, output,session) {
         names(aux)[1] = "ano"
         
         plotar = ggplot(aux) +
-            geom_point(aes(x = ano, y = total), color = "red2") +
-            geom_line(aes(x = ano, y = total, group = 1), color = "red2") +
+            geom_point(aes(x = ano, y = total), color = "red2", alpha = 0.6) +
+            geom_line(aes(x = ano, y = total, group = 1), color = "red2", alpha = 0.6) +
             #geom_text(aes(x = ano,y = media, label = round(media,3))) +
             #scale_x_discrete(limits = ordem) +
             labs(x = "Ano", y = "Número de nascidos vivos") +
