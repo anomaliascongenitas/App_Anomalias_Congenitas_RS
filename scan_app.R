@@ -1,11 +1,11 @@
 library(scanstatistics)
 library(ggplot2)
 library(dplyr)
-library(sp)
-library(magrittr)
+#library(sp)
+#library(magrittr)
 library(stringr)
 library(INLA)
-library(rlist)
+#library(rlist)
 
 ## here deve estar localizado na pasta principal onde esta o aplicativo Shiny (arquivo global.r)
 localarquivo <- function(x){
@@ -17,25 +17,29 @@ source(str_c(here::here(),"/","global.r"),encoding = "UTF-8")
 gerar_banco_modelo_aux <- function(cid2){
   
   banco_aux <- banco_cid %>%
-    filter(as.numeric(cid) %in% cid2) %>%
+    filter(cid_num %in% cid2) %>%
     group_by(ANO_NASC,CODMUNRES) %>%
-    summarise(NOMEMUN = unique(NOMEMUN),nascidos_vivos_anomalia = sum(nascidos_vivos_anomalia),prevalencia = sum(nascidos_vivos_anomalia/unique(numero_nascidos_vivos))*10^4)
+    summarise(nascidos_vivos_anomalia = n())
   
   banco_aux2 <- banco_nascimentos %>%
     left_join(banco_aux,by=c("CODMUNRES","ANO_NASC")) 
   
   
   banco_aux2 <- banco_aux2 %>%
-    replace_na(list(nascidos_vivos_anomalia = 0, prevalencia = 0)) %>%
-    select(1,4,NOMEMUN = NOMEMUN.x,5,nascidos_vivos_anomalia = nascidos_vivos_anomalia, 7)
+    replace_na(list(nascidos_vivos_anomalia = 0))
+    #mutate(prevalencia = nascidos_vivos_anomalia/numero_nascidos_vivos*10^4) %>%
+    #select(NOMEMUN = NOMEMUN,numero_nascidos_vivos,nascidos_vivos_anomalia)
   
   linha_pinto_bandeira  <- banco_aux2[banco_aux2$NOMEMUN == "Pinto Bandeira",]
   num_linha_bento_goncalves <- which(banco_aux2$NOMEMUN == "Bento Gonçalves")
   banco_aux2[num_linha_bento_goncalves,4:5] = banco_aux2[num_linha_bento_goncalves,4:5] + linha_pinto_bandeira[,4:5]
   
   
+  
+  
   banco_aux2 <- banco_aux2 %>%
     filter(NOMEMUN != "Pinto Bandeira")
+  
   
   return(banco_aux2)
 }
@@ -57,12 +61,12 @@ lista_completa <- list()
 
 
 
-for (i in 1:8) {
-  banco_modelo <- gerar_banco_modelo_aux(i)
+for (i in 1:9) {
+  banco_modelo <- gerar_banco_modelo_aux(1)
   
   
   counts <- banco_modelo  %>% 
-    select(1,2,5) %>%
+    select(1,3,5) %>%
     df_to_matrix(time_col = "ANO_NASC", location_col = "CODMUNRES", value_col = "nascidos_vivos_anomalia")
   
   
@@ -92,8 +96,14 @@ for (i in 1:8) {
   g <- inla.read.graph(filename = localarquivo("modelagem/Scan/map.adj"))
   
   
-  proporcao_media <- sum(banco_modelo$nascidos_vivos_anomalia)/sum(banco_modelo$numero_nascidos_vivos)
-  banco_modelo$valor_esperado <- banco_modelo$numero_nascidos_vivos*proporcao_media
+  
+  
+  proporcao_media <- banco_modelo %>%
+    group_by(ANO_NASC) %>%
+    summarise(valor = sum(nascidos_vivos_anomalia)/sum(numero_nascidos_vivos))
+  
+  
+  banco_modelo$valor_esperado <- banco_modelo$numero_nascidos_vivos*proporcao_media$valor[banco_modelo$ANO_NASC - 2009]
   
   ebp_baselines <- banco_modelo  %>% 
     #df_to_matrix(value_col = "mu")
@@ -105,9 +115,9 @@ for (i in 1:8) {
   poisson_result <- scan_eb_poisson(counts = counts, 
                                     zones = g$nbs , #max_duration = 3,
                                     baselines = ebp_baselines,
-                                    n_mcsim = 999)
+                                    n_mcsim = 9999)
   print(poisson_result)
-  poisson
+  
   
   
   
@@ -134,7 +144,7 @@ for (i in 1:8) {
 
 
 
-lista_completa[[9]] <- banco_modelo
+lista_completa[[10]] <- banco_modelo
 
 
 

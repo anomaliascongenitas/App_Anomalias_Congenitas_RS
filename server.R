@@ -166,19 +166,37 @@ server <- function(input, output,session) {
 
   datasetInputcid <- reactive({
     
-    banco_aux <- banco_cid %>%
-      filter(as.numeric(cid) %in% input$checkbox_cid) %>%
+    banco_aux <- banco_2019 %>%
+      filter(cid_num %in% input$checkbox_cid) %>%
+      group_by(NUMERODN) %>%
+      summarise(ANO_NASC = unique(ANO_NASC),CODMUNRES = unique(CODMUNRES))
+    
+    banco_aux2 <- banco_aux %>%
       group_by(ANO_NASC,CODMUNRES) %>%
-      summarise(nascidos_vivos_anomalia = sum(nascidos_vivos_anomalia),prevalencia = sum(nascidos_vivos_anomalia/unique(numero_nascidos_vivos))*10^4,NOMEMUN = unique(NOMEMUN))
-    
-    banco_aux2 <- banco_nascimentos %>%
-      left_join(banco_aux,by=c("CODMUNRES","ANO_NASC")) 
+      summarise(nascidos_vivos_anomalia = n())
     
     
-    banco_aux2 <- banco_aux2 %>%
-      replace_na(list(nascidos_vivos_anomalia = 0, prevalencia = 0)) %>%
-      select(1,4,NOMEMUN = NOMEMUN.x,5,nascidos_vivos_anomalia = nascidos_vivos_anomalia, 7) %>%
+    banco_aux3 <- banco_nascimentos %>%
+      left_join(banco_aux2,by  = c("CODMUNRES","ANO_NASC" = "ANO_NASC")) %>%
+      mutate(nascidos_vivos_anomalia = replace_na(nascidos_vivos_anomalia, 0),prevalencia = nascidos_vivos_anomalia/numero_nascidos_vivos*10^4) %>%
+      mutate(prevalencia = ifelse(is.nan(prevalencia),0,prevalencia)) # Pinto Bandeira 2010-2012
+    
+    
+    banco_aux3 %>%
       filter(CODMUNRES %in% macro_saude_filtro())
+    # banco_aux <- banco_cid %>%
+    #   filter(cid_num %in% input$checkbox_cid) %>%
+    #   group_by(ANO_NASC,CODMUNRES) %>%
+    #   summarise(nascidos_vivos_anomalia = sum(nascidos_vivos_anomalia),prevalencia = sum(nascidos_vivos_anomalia/unique(numero_nascidos_vivos))*10^4,NOMEMUN = unique(NOMEMUN))
+    # 
+    # banco_aux2 <- banco_nascimentos %>%
+    #   left_join(banco_aux,by=c("CODMUNRES","ANO_NASC")) 
+    # 
+    # 
+    # banco_aux2 <- banco_aux2 %>%
+    #   replace_na(list(nascidos_vivos_anomalia = 0, prevalencia = 0)) %>%
+    #   select(1,4,NOMEMUN = NOMEMUN.x,5,nascidos_vivos_anomalia = nascidos_vivos_anomalia, 7) %>%
+    #   filter(CODMUNRES %in% macro_saude_filtro())
     
   })
   
@@ -194,10 +212,14 @@ server <- function(input, output,session) {
   
   
   datasetInputcid_min <- reactive({
+    
+    
+  
+    
     banco_aux <- banco_cid %>%
       filter(CODMUNRES %in% macro_saude_filtro()) %>%
       group_by(ANO_NASC,cid) %>%
-      summarise(nascidos_vivos_anomalia = sum(nascidos_vivos_anomalia)) %>%
+      summarise(nascidos_vivos_anomalia = n()) %>%
       ungroup()
     
     banco_aux$ANO_NASC = as.numeric(banco_aux$ANO_NASC)
@@ -209,24 +231,24 @@ server <- function(input, output,session) {
       summarise(total_nascidos_vivos = sum(numero_nascidos_vivos))
     
     
-    banco_aux2[,2:10] <- banco_aux2[,2:10]/matrix(rep(banco_aux3$total_nascidos_vivos,each= 8),ncol = 9,byrow = F)*10^4
+    banco_aux2[,2:11] <- banco_aux2[,2:11]/matrix(rep(banco_aux3$total_nascidos_vivos,each= 9),ncol = 10,byrow = F)*10^4
     banco_aux2
     
     
   })
   
-  datasetInputcid_meso <- reactive({
-    banco_aux2 <- datasetInputcid() %>% 
-      filter(ANO_NASC  == input$ano_grafico_cid) %>%
-      merge(.,base_mesoregiao,by.x=c("CODMUNRES"),by.y = c("IBGE"))
-    
-    banco_aux2 <- banco_aux2 %>%
-      group_by(IBGE_meso,Nome_Mesoregiao) %>%
-      summarise(numero_nascidos_vivos = sum(numero_nascidos_vivos), nascidos_vivos_anomalia = sum(nascidos_vivos_anomalia),
-                prevalencia = nascidos_vivos_anomalia/numero_nascidos_vivos*10^4) %>%
-      ungroup() 
-    banco_aux2
-  })
+  # datasetInputcid_meso <- reactive({
+  #   banco_aux2 <- datasetInputcid() %>% 
+  #     filter(ANO_NASC  == input$ano_grafico_cid) %>%
+  #     merge(.,base_mesoregiao,by.x=c("CODMUNRES"),by.y = c("IBGE"))
+  #   
+  #   banco_aux2 <- banco_aux2 %>%
+  #     group_by(IBGE_meso,Nome_Mesoregiao) %>%
+  #     summarise(numero_nascidos_vivos = sum(numero_nascidos_vivos), nascidos_vivos_anomalia = sum(nascidos_vivos_anomalia),
+  #               prevalencia = nascidos_vivos_anomalia/numero_nascidos_vivos*10^4) %>%
+  #     ungroup() 
+  #   banco_aux2
+  # })
   
   
   
@@ -269,8 +291,23 @@ server <- function(input, output,session) {
     vetor
   })
   
+  dataset_box_filtro_casos <- reactive({
+    vetor = c()
+    vetor[1] = sum(dataset_anomalia_analise_casos_ano_filtro()$numero_nascidos_vivos)
+    vetor[2] = sum(dataset_anomalia_analise_casos_ano_filtro()$nascidos_vivos_anomalia)
+    vetor[3] = ifelse(vetor[1] != 0 ,round((vetor[2]/vetor[1])*10^4,3),0)
+    vetor
+  })
   
+  dataset_box_filtro_pop <- reactive({
+    vetor = c()
+    vetor[1] = sum(dataset_anomalia_analise_pop_ano_filtro()$numero_nascidos_vivos)
+    vetor[2] = sum(dataset_anomalia_analise_pop_ano_filtro()$nascidos_vivos_anomalia)
+    vetor[3] = ifelse(vetor[1] != 0 ,round((vetor[2]/vetor[1])*10^4,3),0)
+    vetor
+  })
   
+
   ################ Box ###########################
   
   
@@ -313,7 +350,7 @@ server <- function(input, output,session) {
     
     output$box_populacao_casos <- renderValueBox({
         valueBox(
-          dataset_box_filtro()[1],
+          dataset_box_filtro_casos()[1],
             "Total nascidos vivos",
             icon = icon("baby",lib = "font-awesome"),
             color = "blue"
@@ -322,7 +359,7 @@ server <- function(input, output,session) {
     
     output$box_numero_casos_casos <- renderValueBox({
         valueBox(
-          dataset_box_filtro()[2],
+          dataset_box_filtro_casos()[2],
             "Total nascidos vivos com anomalias congenitas",
             icon = icon("notes-medical"),
             color = "red"
@@ -331,7 +368,7 @@ server <- function(input, output,session) {
     
     output$box_prevalencia_casos <- renderValueBox({
         valueBox(
-          dataset_box_filtro()[3],
+          dataset_box_filtro_casos()[3],
             "Prevalência ao nascimento no RS por 10000",
             icon = icon("notes-medical"),
             color = "purple"
@@ -344,7 +381,7 @@ server <- function(input, output,session) {
     
     output$box_populacao_pop <- renderValueBox({
         valueBox(
-          dataset_box_filtro()[1],
+          dataset_box_filtro_pop()[1],
             "Total nascidos vivos",
           icon = icon("baby",lib = "font-awesome"),
             color = "blue"
@@ -353,7 +390,7 @@ server <- function(input, output,session) {
     
     output$box_numero_casos_pop <- renderValueBox({
         valueBox(
-          dataset_box_filtro()[2],
+          dataset_box_filtro_pop()[2],
             "Total nascidos vivos com anomalias congenitas",
             icon = icon("notes-medical"),
             color = "red"
@@ -362,7 +399,7 @@ server <- function(input, output,session) {
     
     output$box_prevalencia_pop <- renderValueBox({
         valueBox(
-          dataset_box_filtro()[3],
+          dataset_box_filtro_pop()[3],
             "Prevalência ao nascimento no RS por 10000",
             icon = icon("notes-medical"),
             color = "purple"
@@ -378,9 +415,9 @@ server <- function(input, output,session) {
     ###################### Box aba cid ####################
     
     output$box_populacao_cid <- renderValueBox({
-      banco_aux <- dataset_anomalia_analise_ano_filtro()
+    
       valueBox(
-        sum(banco_aux$numero_nascidos_vivos),
+        sum(datasetInputcid_ano()$numero_nascidos_vivos),
         "Total nascidos vivos",
         icon = icon("baby",lib = "font-awesome"),
         color = "blue"
@@ -390,7 +427,7 @@ server <- function(input, output,session) {
     
     output$box_numero_casos_cid <- renderValueBox({
       # banco_aux <- banco_cid %>% 
-      #  filter(as.numeric(cid) %in% input$checkbox_cid, ANO_NASC == input$ano_grafico_cid,CODMUNRES %in% macro_saude_filtro())
+      #  filter(cid_num %in% input$checkbox_cid, ANO_NASC == input$ano_grafico_cid,CODMUNRES %in% macro_saude_filtro())
       
       valueBox(
         sum(datasetInputcid_ano()$nascidos_vivos_anomalia),
@@ -401,10 +438,10 @@ server <- function(input, output,session) {
     })
     
     output$box_prevalencia_cid <- renderValueBox({
-      banco_aux <- dataset_anomalia_analise_ano_filtro()
+      
       
       valueBox(
-        round(sum(datasetInputcid_ano()$nascidos_vivos_anomalia)/sum(banco_aux$numero_nascidos_vivos)*10^4,3),
+        round(sum(datasetInputcid_ano()$nascidos_vivos_anomalia)/sum(datasetInputcid_ano()$numero_nascidos_vivos)*10^4,3),
         "Prevalência ao nascimento no RS por 10000",
         icon = icon("notes-medical"),
         color = "purple"
@@ -429,10 +466,23 @@ server <- function(input, output,session) {
           dataset$municipio  <- str_to_lower(dataset$NOMEMUN)
           
           
-          names(dataset)[6]=c("variavel")
+          posicao <- which(names(dataset) == "prevalencia")
           
-          pal <- colorBin("plasma", domain = dataset$variavel, bins = bins_defalt$brks)
+          names(dataset)[posicao]=c("variavel")
           
+          
+          ponto_central <- round(sum(dataset$nascidos_vivos_anomalia)/sum(dataset$numero_nascidos_vivos)*10^4,3)
+          
+          var_aux <- dataset$variavel[dataset$variavel > 0]
+          primeira_parte_escala <-  seq(0+10^-4,ponto_central,length.out = 4)
+          segunda_parte_escala <- ponto_central + (ponto_central - primeira_parte_escala[3])*c(1,3,6,10)
+          terceira_parte_escala <- max(var_aux)
+          escala <- c(0,unique(c(primeira_parte_escala,segunda_parte_escala,terceira_parte_escala)))
+          
+          #pal <- colorBin("plasma", domain = dataset$variavel, bins = bins_defalt$brks)
+          
+          pal <- colorBin("plasma", domain = dataset$variavel, bins = escala)
+          #"YlOrRd"
           pal2 <- function(x){
             ifelse(x==0,"#808080",pal(x))
           }
@@ -465,60 +515,72 @@ server <- function(input, output,session) {
                         labelOptions = labelOptions(
                           style = list("font-weight" = "normal", padding = "6px 11px"),
                           textsize = "13px",
+                          opacity = 0.75,
                           direction = "bottom")) %>%
+      #       htmlwidgets::onRender("
+      # function(el, x) {
+      #   console.log(this);
+      #   var myMap = this;
+      #   var imageUrl = 'http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg';
+      #   var imageBounds = [[0, 0], [10, 10]];
+      # 
+      #   L.imageOverlay(imageUrl, imageBounds).addTo(myMap);
+      # }
+      # ") %>% 
             leaflet::addLegend(pal = pal, values = ~tidy$variavel, opacity = 0.7, title = "Prevalência ao nascimento",
                                labFormat = labelFormat(digits = 3),
-                               position = "bottomright")
-        } else if(input$group_regiao_cid == 2){
-          
-          dataset <- datasetInputcid_meso()
-          
-          
-          names(dataset)[5] = "variavel"
-          
-          
-          
-          
-          limites <- c(round(min(dataset$variavel),0)-1,round(max(dataset$variavel),0)+1)
-          
-          pal <- colorBin("plasma", domain = dataset$variavel, bins = seq(limites[1],limites[2],length.out = 6))
-          
-          pal2 <- function(x){
-            ifelse(x==0,"#808080",pal(x))
-          }
-          #########################################################################################
-          #### MAPA  
-          #########################################################################################
-          tidy <- dataset %>%
-            merge(mapa_rs_meso,by.x = c("Nome_Mesoregiao"), by.y = c("NM_MESO"))  
-          tidy = st_as_sf(tidy)
-          tidy <- st_transform(tidy, "+init=epsg:4326") ##leaflet
-          
-          
-          leaflet(tidy) %>%
-            addProviderTiles(providers$OpenStreetMap.Mapnik) %>%
-            addPolygons(fillColor = ~pal2(variavel), 
-                        weight = 1.5,
-                        opacity = 0.7,
-                        fillOpacity = 0.7,
-                        color = "gray",
-                        highlight = highlightOptions(
-                          weight = 5,
-                          color = "#666",
-                          fillOpacity = 0.7,
-                          bringToFront = TRUE),
-                        label = sprintf("<strong>%s</strong><br/>Prevalência ao nascimento:
-                                  %s</strong><br/>Número nascidos vivos: %s<br/>Número nascidos vivos com anomalia: %s",
-                                        tidy$Nome_Mesoregiao, round(tidy$variavel,3), tidy$numero_nascidos_vivos, 
-                                        tidy$nascidos_vivos_anomalia) %>%
-                          lapply(htmltools::HTML),
-                        labelOptions = labelOptions(
-                          style = list("font-weight" = "normal", padding = "6px 11px"),
-                          textsize = "13px",
-                          direction = "bottom")) %>%
-            leaflet::addLegend(pal = pal, values = ~tidy$variavel, opacity = 0.7, title = "Prevalência ao nascimento",
-                               labFormat = labelFormat(digits = 3),
-                               position = "bottomright")
+                               position = "bottomright")  %>% 
+            addScaleBar(position = 'bottomleft')
+        # } else if(input$group_regiao_cid == 2){
+        #   
+        #   dataset <- datasetInputcid_meso()
+        #   
+        #   
+        #   names(dataset)[5] = "variavel"
+        #   
+        #   
+        #   
+        #   
+        #   limites <- c(round(min(dataset$variavel),0)-1,round(max(dataset$variavel),0)+1)
+        #   
+        #   pal <- colorBin("plasma", domain = dataset$variavel, bins = seq(limites[1],limites[2],length.out = 6))
+        #   
+        #   pal2 <- function(x){
+        #     ifelse(x==0,"#808080",pal(x))
+        #   }
+        #   #########################################################################################
+        #   #### MAPA  
+        #   #########################################################################################
+        #   tidy <- dataset %>%
+        #     merge(mapa_rs_meso,by.x = c("Nome_Mesoregiao"), by.y = c("NM_MESO"))  
+        #   tidy = st_as_sf(tidy)
+        #   tidy <- st_transform(tidy, "+init=epsg:4326") ##leaflet
+        #   
+        #   
+        #   leaflet(tidy) %>%
+        #     addProviderTiles(providers$OpenStreetMap.Mapnik) %>%
+        #     addPolygons(fillColor = ~pal2(variavel), 
+        #                 weight = 1.5,
+        #                 opacity = 0.7,
+        #                 fillOpacity = 0.7,
+        #                 color = "gray",
+        #                 highlight = highlightOptions(
+        #                   weight = 5,
+        #                   color = "#666",
+        #                   fillOpacity = 0.7,
+        #                   bringToFront = TRUE),
+        #                 label = sprintf("<strong>%s</strong><br/>Prevalência ao nascimento:
+        #                           %s</strong><br/>Número nascidos vivos: %s<br/>Número nascidos vivos com anomalia: %s",
+        #                                 tidy$Nome_Mesoregiao, round(tidy$variavel,3), tidy$numero_nascidos_vivos, 
+        #                                 tidy$nascidos_vivos_anomalia) %>%
+        #                   lapply(htmltools::HTML),
+        #                 labelOptions = labelOptions(
+        #                   style = list("font-weight" = "normal", padding = "6px 11px"),
+        #                   textsize = "13px",
+        #                   direction = "bottom")) %>%
+        #     leaflet::addLegend(pal = pal, values = ~tidy$variavel, opacity = 0.7, title = "Prevalência ao nascimento",
+        #                        labFormat = labelFormat(digits = 3),
+        #                        position = "bottomright")
           
         } else{
           aux <- datasetInputcid_macro_saude() 
@@ -561,10 +623,12 @@ server <- function(input, output,session) {
                         labelOptions = labelOptions(
                           style = list("font-weight" = "normal", padding = "6px 11px"),
                           textsize = "13px",
+                          opacity = 0.75,
                           direction = "bottom")) %>%
             leaflet::addLegend(pal = pal, values = ~tidy$variavel, opacity = 0.7, title = "Prevalência ao nascimento",
                                labFormat = labelFormat(digits = 3),
-                               position = "bottomright")
+                               position = "bottomright") %>%
+            addScaleBar(position = 'bottomleft')
           
         }  
         
@@ -593,7 +657,7 @@ server <- function(input, output,session) {
         names(aux)[3] = c("municipio")
         
         plot_barras <- ggplot(aux, aes(x = municipio, y = prevalencia)) +
-          geom_col(fill = "darkmagenta") +
+          geom_col(fill = "darkmagenta", alpha = 0.6) +
           labs(x = "Município", y = "Prevalência ao nascimento") +
           #labs(x = "Municipio", y = "Gráfico das 20 cidades com maiores valores de Prevalencia por 10000") +
           scale_x_discrete(limits = ordem) +
@@ -619,11 +683,11 @@ server <- function(input, output,session) {
         names(aux)[1] = "ano"
         
         plotar = ggplot(aux) +
-          geom_point(aes(x = ano, y = prevalencia), color = "darkmagenta") +
-          geom_line(aes(x = ano, y = prevalencia, group = 1), color = "darkmagenta") +
+          geom_point(aes(x = ano, y = prevalencia), color = "darkmagenta", alpha = 0.6) +
+          geom_line(aes(x = ano, y = prevalencia, group = 1), color = "darkmagenta", alpha = 0.6) +
           #geom_text(aes(x = ano,y = media, label = round(media,3))) +
           #scale_x_discrete(limits = ordem) +
-          labs(x = "Ano", y = "Média Prevalência ao nascimento") +
+          labs(x = "Ano", y = "Prevalência ao nascimento") +
           ylim(min(aux$prevalencia)-5, max(aux$prevalencia)+5)+
           #scale_fill_manual(values = cores_uti_emergencia) +
           #scale_color_manual(values = cores_uti_emergencia) +
@@ -639,7 +703,7 @@ server <- function(input, output,session) {
     #   if(length(input$checkbox_cid) != 0){
     #     
     #     # banco_aux <- banco_cid %>%
-    #     #   filter(as.numeric(cid) %in% input$checkbox_cid) %>%
+    #     #   filter(cid_num %in% input$checkbox_cid) %>%
     #     #   group_by(ANO_NASC,CODMUNRES) %>%
     #     #   summarise(prevalencia = sum(nascidos_vivos_anomalia/unique(numero_nascidos_vivos))*10^4,NOMEMUN = unique(NOMEMUN),nascidos_vivos_anomalia = sum(nascidos_vivos_anomalia))
     #     # 
@@ -691,13 +755,14 @@ server <- function(input, output,session) {
       
 
       grafico <- ggplot(banco, aes(y = prevalencia, x = ano,fill = ano)) +
-        geom_violin(position = position_dodge(width = 0.9)
+        geom_violin(position = position_dodge(width = 0.9),
                     #,
                     #text=sprintf(" %s <br>Prevalências ao nascimento: %s <br>Ano: %s", banco$NOMEMUN,round(banco$prevalencia,3),banco$ano)
-                    ) +
-        geom_quasirandom(dodge.width = 0.2, varwidth = TRUE,mapping = aes(text=sprintf(" %s <br>Prevalências ao nascimento: %s <br>Ano: %s", NOMEMUN,round(prevalencia,3),ano))) +
+                    alpha = 0.5) +
+        geom_quasirandom(dodge.width = 0.2, varwidth = TRUE,mapping = 
+                           aes(text=sprintf(" %s <br>Prevalências ao nascimento: %s <br>Ano: %s", NOMEMUN,round(prevalencia,3),ano)), alpha = 0.6) +
         ylim( input$limite_dots_cid) +
-        scale_fill_manual(values = rep("darkmagenta",9))
+        scale_fill_manual(values = rep("darkmagenta",10))
       
       
       ggplotly(grafico,tooltip = "text")
@@ -709,20 +774,41 @@ server <- function(input, output,session) {
     output$plot_quadradinhos_cid <- renderPlotly({
       if(length(input$checkbox_cid) != 0){
         
-        cidades_banco_quadradinhos = banco_anomalias_analise %>%
-          filter(ANO_NASC == 2018) %>%
-          arrange(Total) %>%
-          filter(NOMEMUN %in% input$input_quadradinhos_cid)  %>%
+        cidades_banco_quadradinhos = banco_nascimentos %>%
+          filter(ANO_NASC == 2019,NOMEMUN %in% input$input_quadradinhos_cid) %>%
+          #arrange(numero_nascidos_vivos) %>%
           select(CODMUNRES)
         
-        banco_agrupado <- banco_cid %>%
-          filter(as.numeric(cid) %in% input$checkbox_cid,CODMUNRES %in% cidades_banco_quadradinhos[[1]]) %>%
+        
+        
+   
+        
+        
+        # banco_aux <- banco_2019 %>%
+        #   filter(cid_num %in% input$checkbox_cid) %>%
+        #   group_by(NUMERODN) %>%
+        #   summarise(ANO_NASC = unique(ANO_NASC),CODMUNRES = unique(CODMUNRES),nascidos_vivos_anomalia = 1)
+        # 
+        # 
+        # banco_aux2 <- banco_aux %>%
+        #   group_by(ANO_NASC,CODMUNRES) %>%
+        #   summarise(nascidos_vivos_anomalia = sum(nascidos_vivos_anomalia))
+        # 
+        # 
+        # banco_aux3 <- banco_nascimentos %>%
+        #   left_join(banco_aux2,by  = c("CODMUNRES","ANO_NASC" = "ANO_NASC")) %>%
+        #   mutate(nascidos_vivos_anomalia = replace_na(nascidos_vivos_anomalia, 0),prevalencia = nascidos_vivos_anomalia/numero_nascidos_vivos*10^4) %>%
+        #   mutate(prevalencia = ifelse(is.nan(prevalencia),0,prevalencia)) # Pinto Bandeira 2010-2012
+        
+        
+        banco_agrupado <- datasetInputcid() %>%
+          filter(CODMUNRES %in% cidades_banco_quadradinhos[[1]]) %>%
           group_by(ANO_NASC,CODMUNRES) %>%
           summarise(prevalencia = sum(nascidos_vivos_anomalia)/unique(numero_nascidos_vivos)*10^4,nascidos_vivos_anomalia = sum(nascidos_vivos_anomalia))
         
         banco_aux <- banco_nascimentos %>%
           filter(CODMUNRES %in% cidades_banco_quadradinhos[[1]]) %>%
-          left_join(banco_agrupado, by = c("ANO_NASC","CODMUNRES"))
+          left_join(banco_agrupado, by = c("ANO_NASC","CODMUNRES")) 
         
         banco_aux$prevalencia[is.na(banco_aux$prevalencia)] = 0
         banco_aux$nascidos_vivos_anomalia[is.na(banco_aux$nascidos_vivos_anomalia)] = 0
@@ -744,19 +830,20 @@ server <- function(input, output,session) {
     output$plot_area_chart_cid <- renderPlotly({
       if(length(input$checkbox_cid) != 0){
         banco <- banco_cid %>%
-          filter(as.numeric(cid) %in% input$checkbox_cid, CODMUNRES %in% macro_saude_filtro()) %>%
+          filter(cid_num %in% input$checkbox_cid, CODMUNRES %in% macro_saude_filtro()) %>%
           group_by(cid,ANO_NASC) %>%
-          summarise(nascidos_vivos_anomalia = sum(nascidos_vivos_anomalia))
+          summarise(nascidos_vivos_anomalia = n())
         
         
         
         myLevels <- banco %>%
-          filter(ANO_NASC==2018) %>%
+          group_by(cid) %>%
+          summarise(nascidos_vivos_anomalia = sum(nascidos_vivos_anomalia)) %>%
           arrange(nascidos_vivos_anomalia)
         
         banco$cid <- factor(banco$cid , levels=myLevels$cid )
         
-        banco$ANO_NASC <- as.numeric(banco$ANO_NASC)
+        #banco$ANO_NASC <- as.numeric(banco$ANO_NASC)
         
         
         banco <- banco %>%
@@ -770,7 +857,8 @@ server <- function(input, output,session) {
           geom_area(alpha=0.6 , size=.5, colour="white") +
           scale_fill_viridis(discrete = T,direction = -1) +
           theme_ipsum() +
-          labs(x="Ano nascimento",y="Número de Nascidos vivos com anomalia")
+          labs(x="Ano nascimento",y="Número de Nascidos vivos com anomalia") +
+          scale_x_continuous(breaks=2010:2019,labels=2010:2019)
         
         ggplotly(p)
       }
@@ -795,7 +883,7 @@ server <- function(input, output,session) {
     
     output$tabela_cid_1 <- renderDataTable({
       aux <- datasetInputcid_min()
-      aux[,2:10] <- round(aux[,2:10],3)
+      aux[,2:11] <- round(aux[,2:11],3)
       
       aux %>%
         datatable(
@@ -862,17 +950,15 @@ server <- function(input, output,session) {
     
     
     output$grafico_mapa_proporcao <- renderLeaflet({
-      
-      if(input$group_regiao %in% 1:2 ){
-        
-      dataset <- dataset_tipo_regiao_selecionada_ano()
-      }
       if(input$group_regiao == 1){
-        aux <- dataset_anomalia_analise_ano_filtro()  %>%
-          select(1,4,5,6,7,8)
-        names(aux)[4] = "Nome"
-        names(aux)[6] = "variavel"
-        names(aux)[3] = "nascidos_vivos_anomalia"
+    
+        aux <- dataset_anomalia_analise_ano_filtro()  
+        
+        posicao <- c(which(names(aux) == "NOMEMUN"),which(names(aux) == "prevalencia"),which(names(aux) == "nascidos_vivos_anomalia"))
+        
+        names(aux)[posicao[1]] = "Nome"
+        names(aux)[posicao[2]] = "variavel"
+        names(aux)[posicao[3]] = "nascidos_vivos_anomalia"
         
         dataset <- aux
         
@@ -907,59 +993,61 @@ server <- function(input, output,session) {
                       labelOptions = labelOptions(
                         style = list("font-weight" = "normal", padding = "6px 11px"),
                         textsize = "13px",
+                        opacity = 0.75,
                         direction = "bottom")) %>%
           leaflet::addLegend(pal = pal, values = ~tidy$variavel, opacity = 0.7, title = "Prevalência ao nascimento",
                              labFormat = labelFormat(digits = 3),
-                             position = "bottomright")
+                             position = "bottomright") %>%
+          addScaleBar(position = 'bottomleft')
         
-      }else if(input$group_regiao == 2) {
-        
-        aux <- banco_meso_analise %>%
-          filter(ANO_NASC == input$ano_grafico,CODMUNRES %in% input$filtro_geral)
-        names(aux)[2] = "Nome"
-        names(aux)[6] = "variavel"
-        
-        limites <- c(round(min(dataset$variavel),0)-1,round(max(dataset$variavel),0)+1)
-        
-        pal <- colorBin("plasma", domain = dataset$variavel, bins = seq(limites[1],limites[2],length.out = 6))
-        
-        pal2 <- function(x){
-          ifelse(x==0,"#808080",pal(x))
-        }
-        #########################################################################################
-        #### MAPA  
-        #########################################################################################
-        tidy <- dataset %>%
-          merge(mapa_rs_meso,by.x = c("Nome"), by.y = c("NM_MESO"))  
-        tidy = st_as_sf(tidy)
-        tidy <- st_transform(tidy, "+init=epsg:4326") ##leaflet
-        
-        
-        leaflet(tidy) %>%
-          addProviderTiles(providers$OpenStreetMap.Mapnik) %>%
-          addPolygons(fillColor = ~pal2(variavel), 
-                      weight = 1.5,
-                      opacity = 0.7,
-                      fillOpacity = 0.7,
-                      color = "gray",
-                      highlight = highlightOptions(
-                        weight = 5,
-                        color = "#666",
-                        fillOpacity = 0.7,
-                        bringToFront = TRUE),
-                      label = sprintf("<strong>%s</strong><br/>Prevalência ao nascimento:
-                                  %s</strong><br/>Número nascidos vivos: %s<br/>Número nascidos vivos com anomalia: %s",
-                                      tidy$Nome, round(tidy$variavel,3), tidy$numero_nascidos_vivos, 
-                                      tidy$nascidos_vivos_anomalia) %>%
-                        lapply(htmltools::HTML),
-                      labelOptions = labelOptions(
-                        style = list("font-weight" = "normal", padding = "6px 11px"),
-                        textsize = "13px",
-                        direction = "bottom")) %>%
-          leaflet::addLegend(pal = pal, values = ~tidy$variavel, opacity = 0.7, title = "Prevalência ao nascimento",
-                             labFormat = labelFormat(digits = 3),
-                             position = "bottomright")
-        
+      # }else if(input$group_regiao == 2) {
+      #   
+      #   aux <- banco_meso_analise %>%
+      #     filter(ANO_NASC == input$ano_grafico,CODMUNRES %in% input$filtro_geral)
+      #   names(aux)[2] = "Nome"
+      #   names(aux)[6] = "variavel"
+      #   
+      #   limites <- c(round(min(dataset$variavel),0)-1,round(max(dataset$variavel),0)+1)
+      #   
+      #   pal <- colorBin("plasma", domain = dataset$variavel, bins = seq(limites[1],limites[2],length.out = 6))
+      #   
+      #   pal2 <- function(x){
+      #     ifelse(x==0,"#808080",pal(x))
+      #   }
+      #   #########################################################################################
+      #   #### MAPA  
+      #   #########################################################################################
+      #   tidy <- dataset %>%
+      #     merge(mapa_rs_meso,by.x = c("Nome"), by.y = c("NM_MESO"))  
+      #   tidy = st_as_sf(tidy)
+      #   tidy <- st_transform(tidy, "+init=epsg:4326") ##leaflet
+      #   
+      #   
+      #   leaflet(tidy) %>%
+      #     addProviderTiles(providers$OpenStreetMap.Mapnik) %>%
+      #     addPolygons(fillColor = ~pal2(variavel), 
+      #                 weight = 1.5,
+      #                 opacity = 0.7,
+      #                 fillOpacity = 0.7,
+      #                 color = "gray",
+      #                 highlight = highlightOptions(
+      #                   weight = 5,
+      #                   color = "#666",
+      #                   fillOpacity = 0.7,
+      #                   bringToFront = TRUE),
+      #                 label = sprintf("<strong>%s</strong><br/>Prevalência ao nascimento:
+      #                             %s</strong><br/>Número nascidos vivos: %s<br/>Número nascidos vivos com anomalia: %s",
+      #                                 tidy$Nome, round(tidy$variavel,3), tidy$numero_nascidos_vivos, 
+      #                                 tidy$nascidos_vivos_anomalia) %>%
+      #                   lapply(htmltools::HTML),
+      #                 labelOptions = labelOptions(
+      #                   style = list("font-weight" = "normal", padding = "6px 11px"),
+      #                   textsize = "13px",
+      #                   direction = "bottom")) %>%
+      #     leaflet::addLegend(pal = pal, values = ~tidy$variavel, opacity = 0.7, title = "Prevalência ao nascimento",
+      #                        labFormat = labelFormat(digits = 3),
+      #                        position = "bottomright")
+      #   
         
       } else {
         banco_aux <- banco_anomalias_analise %>%
@@ -1014,10 +1102,12 @@ server <- function(input, output,session) {
                       labelOptions = labelOptions(
                         style = list("font-weight" = "normal", padding = "6px 11px"),
                         textsize = "13px",
+                        opacity = 0.75,
                         direction = "bottom")) %>%
           leaflet::addLegend(pal = pal, values = ~tidy$variavel, opacity = 0.7, title = "Prevalência ao nascimento",
                              labFormat = labelFormat(digits = 3),
-                             position = "bottomright")
+                             position = "bottomright") %>%
+          addScaleBar(position = 'bottomleft')
         
         
       }
@@ -1037,7 +1127,7 @@ server <- function(input, output,session) {
         ### BANCO DE DADOS  
         dataset <- dataset_anomalia_analise_ano() %>%
             #filter(ANO_NASC == "2016") %>%
-            select(6 ,7 , 8)  
+            select(NOMEMUN,municipio , prevalencia)  
         names(dataset)[3]=c("variavel")
         
         tidy <- dataset %>%
@@ -1110,6 +1200,7 @@ server <- function(input, output,session) {
                 labelOptions = labelOptions(
                     style = list("font-weight" = "normal", padding = "6px 11px"),
                     textsize = "13px",
+                    opacity = 0.75,
                     direction = "bottom")) %>%
             leaflet::addLegend(
                 pal = pal,
@@ -1145,7 +1236,7 @@ server <- function(input, output,session) {
         names(aux)[1] = c("município")
         
         plot_barras <- ggplot(aux, aes(x = município, y = prevalencia)) +
-            geom_col(fill = "darkmagenta") +
+            geom_col(fill = "darkmagenta", alpha = 0.6) +
             labs(x = "Município", y = "Prevalência ao nascimento") +
             #labs(x = "Municipio", y = "Gráfico das 20 cidades com maiores valores de Prevalencia por 10000") +
             scale_x_discrete(limits = ordem) +
@@ -1172,8 +1263,8 @@ server <- function(input, output,session) {
         names(aux)[1] = "ano"
         
         plotar = ggplot(aux) +
-            geom_point(aes(x = ano, y = prevalencia), color = "darkmagenta") +
-            geom_line(aes(x = ano, y = prevalencia, group = 1), color = "darkmagenta") +
+            geom_point(aes(x = ano, y = prevalencia), color = "darkmagenta", alpha = 0.6) +
+            geom_line(aes(x = ano, y = prevalencia, group = 1), color = "darkmagenta", alpha = 0.6) +
             #geom_text(aes(x = ano,y = media, label = round(media,3))) +
             #scale_x_discrete(limits = ordem) +
             labs(x = "Ano", y = "Média Prevalência ao nascimento") +
@@ -1257,7 +1348,7 @@ server <- function(input, output,session) {
     dataset_tabela_prevalencia <- reactive({
       banco_aux <- banco_anomalias_analise %>%
         filter(CODMUNRES %in% macro_saude_filtro()) %>%
-        select(c(1,6,3,4,5,8)) %>%
+        select(CODMUNRES,NOMEMUN,ANO_NASC,numero_nascidos_vivos,nascidos_vivos_anomalia,prevalencia) %>%
         rename(ano_de_nascimento=ANO_NASC, nascidos_vivos_anomalia=nascidos_vivos_anomalia)
       
       banco_aux
@@ -1291,35 +1382,7 @@ server <- function(input, output,session) {
         )
     })
     
-    #########################
-    
-    # datasetInput <- reactive({
-    #     
-    #     banco_anomalias_analise %>%
-    #         select(-municipio, - Total) %>%
-    #         rename(ano_de_nascimento = ANO_NASC ,  nascidos_vivos_anomalia = nascidos_vivos_anomalia)
-    #     # banco_completo2 = banco_completo %>%
-    #     #   #filter(pergunta_3 %in% input$curso)
-    #     #   filter(curso %in% input$curso) %>% ## testando
-    #     #   mutate(acesso_internet = pergunta_4,
-    #     #          reside_em_poa = pergunta_9,
-    #     #          disponibilidade_acompanhamento_ensino_remoto = pergunta_10,
-    #     #          outros_motivos_dificuldade_acompanhamento = pergunta_11,
-    #     #          comentarios_ensino_remoto = pergunta_12) %>%
-    #     #   select(curso, acesso_internet, nome, cartao_8_digitos, telefone,email,  reside_em_poa,
-    #     #          disponibilidade_acompanhamento_ensino_remoto,outros_motivos_dificuldade_acompanhamento,
-    #     #          comentarios_ensino_remoto,ingresso,i1,afastado,diplomacao,
-    #     #          quantidade_creditos_matriculados,endereco,bairro,cep_cidade_uf) %>%
-    #     #   arrange(acesso_internet)
-    # })
-    
-    
-    
 
-    
-    
-    
-    
     output$downloadData <- downloadHandler(contentType = "csv",
         
         filename = function() {
@@ -1333,66 +1396,17 @@ server <- function(input, output,session) {
         
     )
     
-    ######################################################################################
-    ##
-    ## QUADRADINHOS
-    ##
-    
-    
-    # 
-    # # ui_filtro_quadradinhos
-    # output$ui_filtro_quadradinhos <- renderUI({
-    #   
-    #   var <- rlang::sym(str_c(input$var_covid,input$tipo_covid))
-    #   var2 <- rlang::sym(input$agrup_covid)
-    #   pop_var <- rlang::sym(str_c("populacao_estimada_",input$agrup_covid))
-    #   
-    #   aux <- dados_covid_rs %>%
-    #     filter(regiao_covid %in% input$filtro_covid) %>%
-    #     mutate(obitos = ifelse(evolucao == "OBITO", 1, 0),
-    #            acompanhamento = ifelse(evolucao == "EM ACOMPANHAMENTO", 1, 0),
-    #            recuperados = ifelse(evolucao == "RECUPERADO", 1, 0)) %>% 
-    #     group_by(!!var2) %>%
-    #     summarise(confirmados = n(), confirmados_taxa = n()*100000/as.numeric(first(!!pop_var)),
-    #               obitos = sum(obitos, na.rm = T), obitos_taxa = sum(obitos, na.rm = T)*100000/as.numeric(first(!!pop_var)), 
-    #               acompanhamento = sum(acompanhamento, na.rm = T), acompanhamento_taxa = sum(acompanhamento, na.rm = T)*100000/as.numeric(first(!!pop_var)),
-    #               recuperados = sum(recuperados, na.rm = T), recuperados_taxa = sum(recuperados, na.rm = T)*100000/as.numeric(first(!!pop_var)),
-    #               populacao = as.numeric(first(!!pop_var))) %>%
-    #     arrange(desc(!!var))
-    #   
-    #   aux <- as.data.frame(aux)
-    #   
-    #   box(
-    #     width = 12,
-    #     selectInput(
-    #       "filtro_quadradinhos",
-    #       label = "Selecione os municípios de interesse(por default estão os 15 de maior quantidade da variável escolhida)",
-    #       choices = aux[,input$agrup_covid],
-    #       selected = aux[1:15,input$agrup_covid],
-    #       multiple = T
-    #     ),
-    #     plotlyOutput("plot_quadradinhos", height = 650L)
-    #   )
-    #   
-    #   
-    # })
-    
-    # plot_quadradinhos
+
     output$plot_quadradinhos <- renderPlotly({
         
         cidades_banco_quadradinhos = banco_anomalias_analise %>%
-            filter(ANO_NASC == 2018) %>%
-            arrange(Total) %>%
+            filter(ANO_NASC == 2019) %>%
+            arrange(numero_nascidos_vivos) %>%
             filter(NOMEMUN %in% input$input_quadradinhos)  %>%
             select(CODMUNRES)
         
         banco_quadradinhos = banco_anomalias_analise %>%
             filter(CODMUNRES %in% cidades_banco_quadradinhos[[1]])
-        
-        
-        
-        
-        
         
         quadradinho=ggplot(banco_quadradinhos,aes(x=ANO_NASC, y=reorder(NOMEMUN, prevalencia, FUN = sum), fill=prevalencia))+
             #scale_y_discrete(expand=c(0,0))
@@ -1412,8 +1426,8 @@ server <- function(input, output,session) {
         
         ### BANCO DE DADOS  
         dataset <- dataset_anomalia_analise_casos_ano_filtro() %>%
-            select(6, 4, 5, 7, 8)  
-        names(dataset)[3]=c("variavel")
+            select(CODMUNRES,NOMEMUN,numero_nascidos_vivos,nascidos_vivos_anomalia,prevalencia,municipio)  
+        names(dataset)[4]=c("variavel")
         
         pal <- colorBin("YlOrRd", domain = dataset$variavel, bins = bins_defalt_nascidos_vivos_anomalia$brks)
         #########################################################################################
@@ -1450,11 +1464,13 @@ server <- function(input, output,session) {
                         labelOptions = labelOptions(
                             style = list("font-weight" = "normal", padding = "6px 11px"),
                             textsize = "13px",
+                            opacity = 0.75,
                             direction = "bottom")) %>%
             leaflet::addLegend(pal = pal, values = ~tidy$variavel, opacity = 0.7, 
                       title = "N nascidos vivos c/ anomalias",
                       labFormat = labelFormat(digits = 3),
-                      position = "bottomright")
+                      position = "bottomright") %>%
+          addScaleBar(position = 'bottomleft')
         
     })
     
@@ -1478,7 +1494,7 @@ server <- function(input, output,session) {
         names(aux)[1] = c("município")
         
         plot_barras <- ggplot(aux, aes(x = município, y = nascidos_vivos_anomalia)) +
-            geom_col(fill = "red2") +
+            geom_col(fill = "red2", alpha = 0.6) +
             labs(x = "Município", y = "Prevalência ao nascimento") +
             #labs(x = "Municipio", y = "Gráfico das 20 cidades com maiores valores de Prevalencia por 10000") +
             scale_x_discrete(limits = ordem) +
@@ -1504,8 +1520,8 @@ server <- function(input, output,session) {
         names(aux)[1] = "ano"
         
         plotar = ggplot(aux) +
-            geom_point(aes(x = ano, y = total), color = "red2") +
-            geom_line(aes(x = ano, y = total, group = 1), color = "red2") +
+            geom_point(aes(x = ano, y = total), color = "red2", alpha = 0.6) +
+            geom_line(aes(x = ano, y = total, group = 1), color = "red2", alpha = 0.6) +
             #geom_text(aes(x = ano,y = media, label = round(media,3))) +
             #scale_x_discrete(limits = ordem) +
             labs(x = "Ano", y = "Número de nascidos vivos com anomalias congênitas") +
@@ -1522,8 +1538,8 @@ server <- function(input, output,session) {
     output$plot_quadradinhos_casos <- renderPlotly({
         
         cidades_banco_quadradinhos = banco_anomalias_analise %>%
-            filter(ANO_NASC == 2018) %>%
-            arrange(Total) %>%
+            filter(ANO_NASC == 2019) %>%
+            arrange(numero_nascidos_vivos) %>%
             filter(NOMEMUN %in% input$input_quadradinhos_casos) %>%
             select(CODMUNRES)
         
@@ -1553,8 +1569,8 @@ server <- function(input, output,session) {
         
       dataset <- dataset_anomalia_analise_pop_ano_filtro() %>%
             #filter(ANO_NASC == "2016") %>%
-            select(6, 4, 5, 7, 8)  
-        names(dataset)[2]=c("variavel")
+            select(CODMUNRES,NOMEMUN,numero_nascidos_vivos,nascidos_vivos_anomalia,prevalencia,municipio)  
+        names(dataset)[3]=c("variavel")
         
         max(banco_anomalias_analise$numero_nascidos_vivos)
         
@@ -1594,7 +1610,8 @@ server <- function(input, output,session) {
                             direction = "bottom")) %>%
             leaflet::addLegend(pal = pal, values = ~tidy$variavel, opacity = 0.7, title = "Número de nascimentos",
                       labFormat = labelFormat(digits = 3),
-                      position = "bottomright")
+                      position = "bottomright") %>%
+          addScaleBar(position = 'bottomleft')
         
         
     })
@@ -1610,7 +1627,7 @@ server <- function(input, output,session) {
         names(aux)[1] = c("município")
         
         plot_barras <- ggplot(aux, aes(x = município, y = numero_nascidos_vivos)) +
-            geom_col(fill = "red2") +
+            geom_col(fill = "red2", alpha = 0.5) +
             labs(x = "Município", y = "numero_nascidos_vivos") +
             #labs(x = "Municipio", y = "Gráfico das 20 cidades com maiores valores de Prevalencia por 10000") +
             scale_x_discrete(limits = ordem) +
@@ -1637,8 +1654,8 @@ server <- function(input, output,session) {
         names(aux)[1] = "ano"
         
         plotar = ggplot(aux) +
-            geom_point(aes(x = ano, y = total), color = "red2") +
-            geom_line(aes(x = ano, y = total, group = 1), color = "red2") +
+            geom_point(aes(x = ano, y = total), color = "red2", alpha = 0.6) +
+            geom_line(aes(x = ano, y = total, group = 1), color = "red2", alpha = 0.6) +
             #geom_text(aes(x = ano,y = media, label = round(media,3))) +
             #scale_x_discrete(limits = ordem) +
             labs(x = "Ano", y = "Número de nascidos vivos") +
@@ -1656,8 +1673,7 @@ server <- function(input, output,session) {
     output$plot_quadradinhos_pop <- renderPlotly({
         
         cidades_banco_quadradinhos = banco_anomalias_analise %>%
-            filter(ANO_NASC == 2018) %>%
-            arrange(Total) %>%
+            filter(ANO_NASC == 2019) %>%
             filter(NOMEMUN %in% input$input_quadradinhos_pop) %>%
             select(CODMUNRES)
         
@@ -1786,7 +1802,7 @@ server <- function(input, output,session) {
       resultado <- lista_completa[[cid_selecionado]][1]
       cluster <- lista_completa[[cid_selecionado]][2]
       banco <- lista_completa[[cid_selecionado]][3]
-      banco_modelo <- lista_completa[[9]]
+      banco_modelo <- lista_completa[[10]]
       
       
       banco$NOMEMUN <- unique(banco_modelo$NOMEMUN)
@@ -1811,7 +1827,7 @@ server <- function(input, output,session) {
         theme_bw()
       
       
-      gRR
+      gRR 
       
       
     })
@@ -1824,7 +1840,7 @@ server <- function(input, output,session) {
     output$mapa_scan <- renderLeaflet({
       cid_selecionado <- as.numeric(input$cid_scan)
       banco <- lista_completa[[cid_selecionado]][3]
-      banco_modelo <- lista_completa[[9]]
+      banco_modelo <- lista_completa[[10]]
       
       
       
@@ -1867,7 +1883,8 @@ server <- function(input, output,session) {
                       direction = "bottom")) %>%
         leaflet::addLegend(pal = pal, values = ~tidy$variavel, opacity = 0.7, title = "Relative score",
                            labFormat = labelFormat(digits = 3),
-                           position = "bottomright")
+                           position = "bottomright") %>%
+        addScaleBar(position = 'bottomleft')
       
       
     })
