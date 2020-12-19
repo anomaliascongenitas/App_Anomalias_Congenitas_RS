@@ -6,3 +6,4 @@ Para utilizar é necessário garantir que todos os pacotes estejam devidamente i
 Para utilização abra um destes arquivos ui.r, server.r ou global.r e clique "Run App".
 
 
+Link para acesso no shinyapp.io: https://projetoanomaliascongenitas.shinyapps.io/App_Anomalias_Congenitas/
