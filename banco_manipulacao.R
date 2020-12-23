@@ -73,7 +73,7 @@ banco_completo_aux <- data.frame(rbind(banco_microcefalia,banco_tubo_neural,banc
   
 
 
-write.csv2(x = banco_completo_aux,file= localarquivo("banco_anomalias_2010-2019.csv"),row.names = FALSE)
+write.csv(x = banco_completo_aux,file= localarquivo("banco_anomalias_2010-2019.csv"),row.names = FALSE)
 
 #banco <- read.csv2(file= localarquivo("banco_anomalias_2010-2019.csv"))
 
@@ -108,4 +108,41 @@ write.csv2(x = banco_completo_aux,file= localarquivo("banco_anomalias_2010-2019.
 #   left_join(banco_aux2,by  = c("CODMUNRES","ANO_NASC" = "ANONASC")) %>%
 #   mutate(nascidos_vivos_anomalia = replace_na(nascidos_vivos_anomalia, 0),prevalencia = nascidos_vivos_anomalia/numero_nascidos_vivos*10^4)
 # sum(banco_aux3$nascidos_vivos_anomalia,na.rm = TRUE)
+
+
+
+
+
+
+
+
+
+localarquivo <- function(x){
+  str_c(here::here(),"/",x)
+}
+
+
+teste <- read.csv2("nascidos_vivos_2019.csv")
+
+
+banco_nascimentos_2019 <- data.frame(CODMUNRES = as.numeric(str_sub(teste$Município,1,6)),
+                                     NOMEMUN = str_sub(teste$Município,8),
+                                     ANO_NASC = 2019,
+                                     numero_nascidos_vivos = teste$Nascim_p.resid.mãe)
+
+
+banco_nascimentos <- read_excel(localarquivo("DNRS201018_selected_17-jul-2020.xlsx")) %>%
+  pivot_longer(c(3: 11), names_to = "ANO_NASC", values_to = "numero_nascidos_vivos")%>%
+  filter(complete.cases(.)) %>%
+  filter(CODMUNRES != 430000) %>%
+  mutate(CODMUNRES = as.numeric(CODMUNRES))  %>%
+  mutate(ANO_NASC = as.numeric(ANO_NASC)) %>%
+  select(-Total)
+
+banco_nascimentos_final <- rbind(banco_nascimentos,banco_nascimentos_2019) %>%
+  arrange(CODMUNRES)
+
+
+
+utils::write.csv(banco_nascimentos_final,"banco_nascimentos.csv",row.names = FALSE,fileEncoding = "UTF-8")
 

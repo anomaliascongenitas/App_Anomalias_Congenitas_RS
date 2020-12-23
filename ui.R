@@ -827,7 +827,7 @@ body <- dashboardBody(
               column(
                 width = 12,
                 box(
-                  title ="Mapa do Risco Relativo por munícipio",
+                  title ="Mapa do Escore Relativo da Estatística Scan por munícipio",
                   #h1("Mapa das prevalencias de anomalias congenitas no ano selecionado"),
                   #h4("Dados provenientes da Pre"),
                   leafletOutput("mapa_scan", height = "700px"),
@@ -850,92 +850,66 @@ body <- dashboardBody(
               # setZoom(id = "covidMetrika",class = "small-box"),
               #  setZoom(id = "git_covidMetrika",class = "small-box"),
               
-              column(
-                width = 12,
-                valueBoxOutput("covidMetrika",width = 12)
-              ),
-              column(
-                width = 6,
-                valueBoxOutput("git_covidMetrika", width = 12)
-              ),
+          
               
-              widgetUserBox(title="Aplicativo desenvolvido pela professora Márcia Helena Barbian 
-                              com colaboração de Lavínia Schuler-Faccini, Augusto Cardoso dos Santos, 
-                              .........",
-                            type=2, collapsible = TRUE,color = "primary", width = 12,
+              widgetUserBox(title="Projeto Anomalias Congênitas",  h4("Esse Aplicativo faz parte do Projeto Anomalias Congênitas e tem como objetivo 
+                                                                                    mostrar a distribuição das Anomalias Congênitas por município de  residência da mãe do Estado do Rio Grande do Sul."),
+                            h4("Fonte de dados: Sistema de Informação sobre Nascidos Vivos (SINASC)"),type=2, collapsible = TRUE,color = "primary", width = 12,
                             tags$div(
                               class="box box-widget widget-user-2", style="left: 407px;bottom: 207px;"
                             )),
+             
+              # widgetUserBox(title="Sobre o aplicativo","Fonte de dados: Sistema de Informação sobre Nascidos Vivos (SINASC)",
+              #               type=2, collapsible = TRUE,color = "", width = 12,
+              #               tags$div(
+              #                 class="box box-widget widget-user-2", style="left: 407px;bottom: 207px;"
+              #               )),
               # 
-              # widgetUserBox(
-              #   title = tags$b("Márcia Helena Barbian"),
-              #   subtitle = "Professora do Departamento de Estatística da UFRGS",
-              #   type = 2,
-              #   width = 12,
-              #   src = 'marcia.png',
-              #   color = "blue",
-              #   "Contato: mhbarbian@ufrgs.br",
-              #   footer_padding = F
-              # ),
-              # 
-              # widgetUserBox(
-              #   title = tags$b("Luzivan Costa Reis"),
-              #   subtitle = "Aluno de Pós-graduação em Genética e Biologia molecular, UFRGS",
-              #   type = 2,
-              #   width = 4,
-              #   src = 'luzivan.jpg',
-              #   color = "red",
-              #   "Contato: luzivanreis@gmail.com",
-              #   footer_padding = F
-              # ),
-              # widgetUserBox(
-              #   title = tags$b("Lavínia Schuler-Faccini"),
-              #   subtitle = "Professora do programa de Pós-graduação em Genética e Biologia molecular, UFRGS",
-              #   type = 2,
-              #   width = 4,
-              #   src = 'ppg_genetica.png',
-              #   color = "red",
-              #   "Contato: lavinia.faccini@ufrgs.br",
-              #   footer_padding = F
-              # ),
-              # 
-              # widgetUserBox(
-              #   title = tags$b("Augusto Cardoso dos Santos"),
-              #   #subtitle = "Pós-graduação em Genética e Biologia molecular, UFRGS",
-              #   type = 2,
-              #   width = 4,
-              #   src = 'ppg_genetica.png',
-              #   color = "red",
-              #   "Contato: santosaccd@gmail.com",
-              #   footer_padding = F
-              # ),
-              # widgetUserBox(
-              #   title = tags$b("Elis Vanessa de Lima e Silva"),
-              #   #subtitle = "Pós-graduação em Genética e Biologia molecular, UFRGS",
-              #   type = 2,
-              #   width = 4,
-              #   src = 'ppg_genetica.png',
-              #   color = "red",
-              #   "Contato: evlsilva@hcpa.edu.br",
-              #   footer_padding = F
-              # ),
-              # widgetUserBox(
-              #   title = tags$b("Juliano Boquett"),
-              #   #subtitle = "Pós-graduação em Genética e Biologia molecular, UFRGS",
-              #   type = 2,
-              #   width = 4,
-              #   src = 'ppg_genetica.png',
-              #   color = "red",
-              #   "Contato: Juliano Boquett ",
-              #   footer_padding = F
-              # ),
               
-              widgetUserBox(title="Fonte de dados: Datasus",
-                            type=2, collapsible = TRUE,color = "", width = 12,
-                            tags$div(
-                              class="box box-widget widget-user-2", style="left: 407px;bottom: 207px;"
-                            )),
-              # ),
+              h2("Equipe de desenvolvimento do Aplicativo"),
+              
+              widgetUserBox(
+                title = tags$b("Márcia Helena Barbian"),
+                subtitle = "Professora do Departamento de Estatística da UFRGS",
+                type = 2,
+                width = 4,height = 160,
+                src = 'marcia.png',
+                color = "blue",
+                "Contato: mhbarbian@ufrgs.br", 
+                footer_padding = F,collapsible=FALSE
+              ), 
+              widgetUserBox(
+                title = tags$b("Bruno Alano da Silva"),
+                subtitle = HTML("Estudante de Estatística da UFRGS"),
+                type = 2,
+                width = 4,height = 160,
+                src = 'bruno.jpg',
+                color = "blue",
+                "Contato: alano.bruno31@gmail.com", 
+                footer_padding = F,collapsible=FALSE
+              ), 
+              widgetUserBox(
+                title = tags$b("Guilherme Rodrigues Boff"),
+                subtitle = HTML("Estudante de Estatística da UFRGS"),
+                type = 2,
+                width = 4,height = 160,
+                src = 'guilherme.jpeg',
+                color = "blue",
+                "guilherme_rboff@hotmail.com", 
+                footer_padding = F,collapsible=FALSE
+              )),
+              
+              fluidRow(
+
+              h2("Código Fonte"),
+              valueBox("Repositório Github", 
+                       subtitle = div("Confira aqui nosso repositório no GitHub!",br(),"Contato: projeto.anomalias.congenitas@gmail.com"), 
+                       icon = icon("github"), 
+                       color = "green", 
+                       width = 12,
+                       href = "https://github.com/projetoanomaliascongenitas/App_Anomalias_Congenitas"
+              )
+              # ),v
               # 
               # 
               # tags$img(src = "logos.png", 

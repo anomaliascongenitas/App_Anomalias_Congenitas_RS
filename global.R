@@ -30,7 +30,7 @@ library(viridis)
 library(ggbeeswarm)
 #library(stringr)
 ################################################
-options(OutDec= ".") #Muda de ponto para virgula nos decimais! 
+#options(OutDec= ".") #Muda de ponto para virgula nos decimais! 
 
 
 localarquivo <- function(x){
@@ -64,7 +64,7 @@ banco_nascimentos <- utils::read.csv(localarquivo("banco_nascimentos.csv"), enco
 
 
 
-banco_2019 <- read.csv2(file= localarquivo("banco_anomalias_2010-2019.csv")) %>%
+banco_2019 <- utils::read.csv(file= localarquivo("banco_anomalias_2010-2019.csv"), encoding="UTF-8") %>%
   rename(ANO_NASC = ANONASC)
 
 banco_cid <- banco_2019
