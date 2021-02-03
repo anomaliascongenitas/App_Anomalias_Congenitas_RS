@@ -58,11 +58,11 @@ lista_completa <- list()
 
 
 
-
+i = 7
 
 
 for (i in 1:9) {
-  banco_modelo <- gerar_banco_modelo_aux(1)
+  banco_modelo <- gerar_banco_modelo_aux(i)
   
   
   counts <- banco_modelo  %>% 
@@ -119,7 +119,7 @@ for (i in 1:9) {
   print(poisson_result)
   
   
-  
+
   
   lista2 <- banco_modelo_aux %>%
     filter(CODMUNRES %in% colnames(counts[,poisson_result$MLC$locations]))

@@ -866,38 +866,86 @@ body <- dashboardBody(
               #               )),
               # 
               
-              h2("Equipe de desenvolvimento do Aplicativo"),
+              h2("Equipe de desenvolvimento do Aplicativo")),
               
+              fluidRow(
               widgetUserBox(
-                title = tags$b("Márcia Helena Barbian"),
+                title = "Márcia Helena Barbian",
                 subtitle = "Professora do Departamento de Estatística da UFRGS",
                 type = 2,
-                width = 4,height = 160,
+                width = 4,#height = 180,
                 src = 'marcia.png',
                 color = "blue",
                 "Contato: mhbarbian@ufrgs.br", 
                 footer_padding = F,collapsible=FALSE
               ), 
               widgetUserBox(
-                title = tags$b("Bruno Alano da Silva"),
+                title = "Bruno Alano da Silva",
                 subtitle = HTML("Estudante de Estatística da UFRGS"),
                 type = 2,
-                width = 4,height = 160,
+                width = 4,#height = 180,
                 src = 'bruno.jpg',
                 color = "blue",
                 "Contato: alano.bruno31@gmail.com", 
                 footer_padding = F,collapsible=FALSE
               ), 
               widgetUserBox(
-                title = tags$b("Guilherme Rodrigues Boff"),
+                title = "Guilherme Rodrigues Boff",
                 subtitle = HTML("Estudante de Estatística da UFRGS"),
                 type = 2,
-                width = 4,height = 160,
+                width = 4,#height = 180,
                 src = 'guilherme.jpeg',
                 color = "blue",
-                "guilherme_rboff@hotmail.com", 
+                "Contato: guilherme_rboff@hotmail.com", 
                 footer_padding = F,collapsible=FALSE
               )),
+            
+            fluidRow(
+              widgetUserBox(
+                title = "Fernanda Sales Luiz Vianna",
+                subtitle = "Professora do Departamento de Genética da UFRGS",
+                type = 2,
+                width = 4,#height = 180,
+                src = 'fernanda.gif',
+                color = "blue",
+                "Contato: fslvianna@gmail.com", 
+                footer_padding = F,collapsible=FALSE
+              ), 
+              widgetUserBox(
+                title = "Luiza Monteavaro Mariath",
+                subtitle = HTML("Doutora em Ciências (Genética e Biologia Molecular) pelo PPGBM da UFRGS"),
+                type = 2,
+                width = 4,#height = 180,
+                src = 'luiza.jpg',
+                color = "blue",
+                "Contato: luiza_mariath@hotmail.com", 
+                footer_padding = F,collapsible=FALSE
+              ), 
+              widgetUserBox(
+                title = "Thayne Woycinck Kowalski",
+                subtitle = HTML("Professora dos cursos da área da saúde do CESUCA"),
+                type = 2,
+                width = 4,#height = 180,
+                src = 'thayne.jpg',
+                color = "blue",
+                "Contato: thaynewk@gmail.com", 
+                footer_padding = F,collapsible=FALSE
+              )),
+            
+            
+            fluidRow(
+              h2("Coordenadora do Projeto"),
+              widgetUserBox(
+                title = "Lavinia Schüler Faccini",
+                subtitle = "Professora do Departamento de Genética da UFRGS",
+                type = 2,
+                width = 4,#height = 180,
+                src = 'lavinia.jpg',
+                color = "blue",
+                "Contato: lschuler@hcpa.edu.br", 
+                footer_padding = F,collapsible=FALSE
+              )),
+            
               
               fluidRow(
 

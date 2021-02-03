@@ -34,7 +34,8 @@ library(ggbeeswarm)
 
 
 localarquivo <- function(x){
-  str_c(here::here(),"/",x)
+  #str_c(here::here(),"/",x)
+  x
 }
 
 ################################################################################
@@ -307,7 +308,7 @@ banco_macro_saude_analise <- banco_macro_saude_analise_aux  %>%
 
 
 
-mapa_rs_modelo <- sf::st_read(str_c(here::here(),"/shapefiles/43MUE250GC_SIR_2010.shp"), quiet = TRUE) %>%
+mapa_rs_modelo <- sf::st_read(localarquivo("shapefiles//43MUE250GC_SIR_2010.shp"), quiet = TRUE) %>%
   mutate(municipio= str_to_lower(NM_MUNICIP))
 
 

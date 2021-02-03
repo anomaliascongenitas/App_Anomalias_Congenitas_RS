@@ -1742,7 +1742,9 @@ server <- function(input, output,session) {
       
       resultado <- lista_completa[[cid_selecionado]][1]$MC_pvalue
       cluster <- lista_completa[[cid_selecionado]][2]$cluster$municipio
-      
+      #duracao <- lista_completa[[cid_selecionado]][1]$MC_pvalue$max_duration
+     
+      #risco_rel <- lista_completa[[cid_selecionado]][1]$MC_pvalue$MC_pvalue$relative_risk
       
       
       
@@ -1750,6 +1752,8 @@ server <- function(input, output,session) {
       n <- length(cluster)
       texto <- str_c("<br>Distribuição: ",resultado$distribution," <br/>",
                      "Monte Carlo p-valor: ", resultado$MC_pvalue, "<br>",
+                     "Duração de tempo considerada: ",resultado$MLC$duration," anos<br/>",
+                     "Risco Relativo do cluster: ",round(resultado$MLC$relative_risk,3)," <br/>",
                      "Municípios que pertencem ao cluster: ",paste(cluster[1:(n-1)],collapse=", ")," e ",cluster[n],".")
       
       
@@ -1775,6 +1779,8 @@ server <- function(input, output,session) {
       texto <- str_c("<br>Distribuição: ",resultado$distribution," <br/>",
                      "Tipo de estatística Scan: univariado"," <br/>",
                      "Número de Regiões consideradas: ",resultado$n_zones," <br>",
+                     "Duração de tempo considerada: ",resultado$MLC$duration," anos<br/>",
+                     "Risco Relativo do cluster: ",round(resultado$MLC$relative_risk,3)," <br/>",
                      "Número de Replicações de Monte Carlo: ",resultado$n_mcsim," <br>",
                      "Monte Carlo p-valor: ", resultado$MC_pvalue, "<br>",
                      "Gumbel p-valor: ",round(resultado$Gumbel_pvalue,5)," <br>",
