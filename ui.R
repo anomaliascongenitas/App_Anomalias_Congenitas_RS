@@ -992,7 +992,7 @@ body <- dashboardBody(
               ), 
               widgetUserBox(
                 title = "Thayne Woycinck Kowalski",
-                subtitle = HTML("Professora dos cursos da área da saúde do CESUCA"),
+                subtitle = HTML("Professora do Centro Universitário CESUCA, pesquisadora do Núcleo de Bioinformática do HCPA"),
                 type = 2,
                 width = 4,#height = 180,
                 src = 'thayne.jpg',
