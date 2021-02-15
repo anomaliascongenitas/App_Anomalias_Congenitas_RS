@@ -112,6 +112,11 @@ body <- dashboardBody(
                 tags$img(src="logo_projeto_anomalias_git.png",height = 107*0.75),
                 tags$img(src="logo_parceiros_projeto.png", height = 107*0.75, width = 1275*.75)
               ),
+              fluidRow(
+                tags$img(src="ufrgs_logo.png", height = 107*0.75),
+                tags$img(src="logos_hcpa_ibc.png", height = 107*0.75),
+                tags$img(src="logo_ime.png", height = 107*0.75))
+              ,
               
               titlePanel("Mapa da prevalência ao nascimento considerandos os grupos de CIDs, ano e macrorregiões de saúde selecionados"),
               
@@ -278,8 +283,8 @@ body <- dashboardBody(
               fluidRow(
                        column(
                          width = 6,
-                         tags$img(src="ufrgs_logo.png", height = 100, width = 127),
-                         tags$img(src="logo_ime.png", height = 100, width = 270),
+                         #tags$img(src="ufrgs_logo.png", height = 100, width = 127),
+                         tags$img(src="pos_estatistica_logo.png", height = 100, width = 220),
                          tags$img(src="ppg_genetica.png", height = 100, width = 124)
                        ))
               
@@ -297,7 +302,12 @@ body <- dashboardBody(
         #width = 6,
         tags$img(src="logo_projeto_anomalias_git.png",height = 107*0.75),
         tags$img(src="logo_parceiros_projeto.png", height = 107*0.75, width = 1275*.75)
-      ),
+      ), 
+      fluidRow(
+        tags$img(src="ufrgs_logo.png", height = 107*0.75),
+        tags$img(src="logos_hcpa_ibc.png", height = 107*0.75),
+        tags$img(src="logo_ime.png", height = 107*0.75))
+      ,
       
       titlePanel("Prevalências ao nascimento de anomalias congenitas por 10.000"),
       #profvis_ui("profiler"),
@@ -462,8 +472,8 @@ body <- dashboardBody(
         #column(width = 3),
         column(
           width = 6,
-          tags$img(src="ufrgs_logo.png", height = 100, width = 127),
-          tags$img(src="logo_ime.png", height = 100, width = 270),
+          #tags$img(src="ufrgs_logo.png", height = 100, width = 127),
+          tags$img(src="pos_estatistica_logo.png", height = 100, width = 220),
           tags$img(src="ppg_genetica.png", height = 100, width = 124)
         ))
     )), #fluidpaige # Tabitem
@@ -484,6 +494,12 @@ body <- dashboardBody(
         tags$img(src="logo_projeto_anomalias_git.png",height = 107*0.75),
         tags$img(src="logo_parceiros_projeto.png", height = 107*0.75, width = 1275*.75)
       ),
+      fluidRow(
+        tags$img(src="ufrgs_logo.png", height = 107*0.75),
+        tags$img(src="logos_hcpa_ibc.png", height = 107*0.75),
+        tags$img(src="logo_ime.png", height = 107*0.75))
+      ,
+      
       titlePanel("Mapa do número de nascidos vivos com anomalias congênitas no ano selecionado"),
       
       fluidRow(column(
@@ -496,8 +512,8 @@ body <- dashboardBody(
         ),h4("O ícone no canto superior direito seleciona quais as macrorregiões de saúde do RS serão apresentadas")),
         column(
           width = 6,
-          tags$img(src="ufrgs_logo.png", height = 100, width = 127),
-          tags$img(src="logo_ime.png", height = 100, width = 270),
+          #tags$img(src="ufrgs_logo.png", height = 100, width = 127),
+          tags$img(src="pos_estatistica_logo.png", height = 100, width = 220),
           tags$img(src="ppg_genetica.png", height = 100, width = 124)
         ),
         
@@ -566,8 +582,8 @@ body <- dashboardBody(
         #column(width = 3),
         column(
           width = 6,
-          tags$img(src="ufrgs_logo.png", height = 100, width = 127),
-          tags$img(src="logo_ime.png", height = 100, width = 270),
+          #tags$img(src="ufrgs_logo.png", height = 100, width = 127),
+          tags$img(src="pos_estatistica_logo.png", height = 100, width = 220),
           tags$img(src="ppg_genetica.png", height = 100, width = 124)
         ))
     )), # #fluidpage Tabitem
@@ -582,6 +598,11 @@ body <- dashboardBody(
       tags$img(src="logo_projeto_anomalias_git.png",height = 107*0.75),
       tags$img(src="logo_parceiros_projeto.png", height = 107*0.75, width = 1275*.75)
     ),
+    fluidRow(
+      tags$img(src="ufrgs_logo.png", height = 107*0.75),
+      tags$img(src="logos_hcpa_ibc.png", height = 107*0.75),
+      tags$img(src="logo_ime.png", height = 107*0.75))
+    ,
       titlePanel("Mapa dos número de nascidos vivos"),
       
       fluidRow(column(
@@ -657,8 +678,8 @@ body <- dashboardBody(
       #column(width = 3),
       column(
         width = 6,
-        tags$img(src="ufrgs_logo.png", height = 100, width = 127),
-        tags$img(src="logo_ime.png", height = 100, width = 270),
+        #tags$img(src="ufrgs_logo.png", height = 100, width = 127),
+        tags$img(src="pos_estatistica_logo.png", height = 100, width = 220),
         tags$img(src="ppg_genetica.png", height = 100, width = 124)
       ))
       
@@ -672,7 +693,7 @@ body <- dashboardBody(
   #             column(
   #               width = 12,
   #               tags$img(src="ufrgs_logo.png", height = 100, width = 127),
-  #               tags$img(src="logo_ime.png", height = 100, width = 270),
+  #               tags$img(src="logo_ime.png", height = 100, width = 220),
   #               tags$img(src="ppg_genetica.png", height = 80, width = 95),
   #               offset = 6
   #             )
@@ -720,6 +741,11 @@ body <- dashboardBody(
               tags$img(src="logo_projeto_anomalias_git.png",height = 107*0.75),
               tags$img(src="logo_parceiros_projeto.png", height = 107*0.75, width = 1275*.75)
             ),
+            fluidRow(
+              tags$img(src="ufrgs_logo.png", height = 107*0.75),
+              tags$img(src="logos_hcpa_ibc.png", height = 107*0.75),
+              tags$img(src="logo_ime.png", height = 107*0.75))
+            ,
             titlePanel("Série Temporal dos nascidos vivos com anomalias congenitas por município"),
             
             fluidRow(
@@ -755,8 +781,8 @@ body <- dashboardBody(
               #column(width = 3),
               column(
                 width = 6,
-                tags$img(src="ufrgs_logo.png", height = 100, width = 127),
-                tags$img(src="logo_ime.png", height = 100, width = 270),
+                #tags$img(src="ufrgs_logo.png", height = 100, width = 127),
+                tags$img(src="pos_estatistica_logo.png", height = 100, width = 220),
                 tags$img(src="ppg_genetica.png", height = 100, width = 124)
               ))
           )
@@ -770,6 +796,11 @@ body <- dashboardBody(
               tags$img(src="logo_projeto_anomalias_git.png",height = 107*0.75),
               tags$img(src="logo_parceiros_projeto.png", height = 107*0.75, width = 1275*.75)
             ),
+            fluidRow(
+              tags$img(src="ufrgs_logo.png", height = 107*0.75),
+              tags$img(src="logos_hcpa_ibc.png", height = 107*0.75),
+              tags$img(src="logo_ime.png", height = 107*0.75))
+            ,
             titlePanel("Série Temporal das prevalências ao nascimento de anomalias congenitas por 10.000
                        por município"),
             
@@ -807,8 +838,8 @@ body <- dashboardBody(
               #column(width = 3),
               column(
                 width = 6,
-                tags$img(src="ufrgs_logo.png", height = 100, width = 127),
-                tags$img(src="logo_ime.png", height = 100, width = 270),
+                #tags$img(src="ufrgs_logo.png", height = 100, width = 127),
+                tags$img(src="pos_estatistica_logo.png", height = 100, width = 220),
                 tags$img(src="ppg_genetica.png", height = 100, width = 124)
               ))
           )
@@ -824,6 +855,11 @@ body <- dashboardBody(
               tags$img(src="logo_projeto_anomalias_git.png",height = 107*0.75),
               tags$img(src="logo_parceiros_projeto.png", height = 107*0.75, width = 1275*.75)
             ),
+            fluidRow(
+              tags$img(src="ufrgs_logo.png", height = 107*0.75),
+              tags$img(src="logos_hcpa_ibc.png", height = 107*0.75),
+              tags$img(src="logo_ime.png", height = 107*0.75))
+            ,
             titlePanel("Estatística Scan"),
             
            br(),
@@ -895,8 +931,8 @@ body <- dashboardBody(
              #column(width = 3),
              column(
                width = 6,
-               tags$img(src="ufrgs_logo.png", height = 100, width = 127),
-               tags$img(src="logo_ime.png", height = 100, width = 270),
+               #tags$img(src="ufrgs_logo.png", height = 100, width = 127),
+               tags$img(src="pos_estatistica_logo.png", height = 100, width = 220),
                tags$img(src="ppg_genetica.png", height = 100, width = 124)
              ))
             
@@ -913,7 +949,14 @@ body <- dashboardBody(
               #width = 6,
               tags$img(src="logo_projeto_anomalias_git.png",height = 107*0.75),
               tags$img(src="logo_parceiros_projeto.png", height = 107*0.75, width = 1275*.75)
-            ),br(),
+            ),
+            fluidRow(
+              tags$img(src="ufrgs_logo.png", height = 107*0.75),
+              tags$img(src="logos_hcpa_ibc.png", height = 107*0.75),
+              tags$img(src="logo_ime.png", height = 107*0.75))
+            ,
+            
+            br(),
             fluidRow(
               
               # setZoom(id = "covidMetrika",class = "small-box"),
@@ -1039,8 +1082,8 @@ body <- dashboardBody(
               #column(width = 3),
               column(
                 width = 6,
-                tags$img(src="ufrgs_logo.png", height = 100, width = 127),
-                tags$img(src="logo_ime.png", height = 100, width = 270),
+                #tags$img(src="ufrgs_logo.png", height = 100, width = 127),
+                tags$img(src="pos_estatistica_logo.png", height = 100, width = 220),
                 tags$img(src="ppg_genetica.png", height = 100, width = 124)
               ))
           ) #fluidpaige
