@@ -896,7 +896,8 @@ server <- function(input, output,session) {
             #scrollY = "460px",
             #paging = FALSE
           )
-        )
+        )%>%
+        formatCurrency(-1,' ', digits = 3, interval = 3, mark = ".", dec.mark = ",")
     })
     
     
@@ -918,18 +919,6 @@ server <- function(input, output,session) {
     output$tabela_cid_2 <- renderDataTable({
       
       datasetInputcid() %>%
-        # #filter(pergunta_3 %in% input$curso)
-        # filter(curso %in% input$curso) %>% ## testando
-        # mutate(acesso_internet = pergunta_4,
-        #        reside_em_poa = pergunta_9,
-        #        disponibilidade_acompanhamento_ensino_remoto = pergunta_10,
-        #        outros_motivos_dificuldade_acompanhamento = pergunta_11,
-        #        comentarios_ensino_remoto = pergunta_12) %>%
-        # select(curso, acesso_internet, nome, cartao_8_digitos, telefone,email,  reside_em_poa,
-        #        disponibilidade_acompanhamento_ensino_remoto,outros_motivos_dificuldade_acompanhamento,
-        #        comentarios_ensino_remoto,ingresso,i1,afastado,diplomacao,
-        #        quantidade_creditos_matriculados,endereco,bairro,cep_cidade_uf) %>%
-      # arrange(acesso_internet) %>%
       datatable(
         rownames = F,
         # filter = "top",
@@ -940,7 +929,8 @@ server <- function(input, output,session) {
           #scrollY = "460px",
           #paging = FALSE
         )
-      )
+      )%>%
+        formatCurrency(-1,' ', digits = 3, interval = 3, mark = ".", dec.mark = ",")
     })
     
     
@@ -1357,18 +1347,6 @@ server <- function(input, output,session) {
     output$tabela <- renderDataTable({
         
       dataset_tabela_prevalencia() %>%
-            # #filter(pergunta_3 %in% input$curso)
-            # filter(curso %in% input$curso) %>% ## testando
-            # mutate(acesso_internet = pergunta_4,
-            #        reside_em_poa = pergunta_9,
-            #        disponibilidade_acompanhamento_ensino_remoto = pergunta_10,
-            #        outros_motivos_dificuldade_acompanhamento = pergunta_11,
-            #        comentarios_ensino_remoto = pergunta_12) %>%
-            # select(curso, acesso_internet, nome, cartao_8_digitos, telefone,email,  reside_em_poa,
-            #        disponibilidade_acompanhamento_ensino_remoto,outros_motivos_dificuldade_acompanhamento,
-            #        comentarios_ensino_remoto,ingresso,i1,afastado,diplomacao,
-            #        quantidade_creditos_matriculados,endereco,bairro,cep_cidade_uf) %>%
-        # arrange(acesso_internet) %>%
         datatable(
             rownames = F,
             # filter = "top",
@@ -1379,7 +1357,8 @@ server <- function(input, output,session) {
                 #scrollY = "460px",
                 #paging = FALSE
             )
-        )
+        )%>%
+        formatCurrency(-1,' ', digits = 3, interval = 3, mark = ".", dec.mark = ",")
     })
     
 
