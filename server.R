@@ -762,7 +762,8 @@ server <- function(input, output,session) {
         geom_quasirandom(dodge.width = 0.2, varwidth = TRUE,mapping = 
                            aes(text=sprintf(" %s <br>Prevalências ao nascimento: %s <br>Ano: %s", NOMEMUN,round(prevalencia,3),ano)), alpha = 0.6) +
         ylim( input$limite_dots_cid) +
-        scale_fill_manual(values = rep("darkmagenta",10))
+        scale_fill_manual(values = rep("darkmagenta",10))+
+        theme(legend.position = "none")  
       
       
       ggplotly(grafico,tooltip = "text")
