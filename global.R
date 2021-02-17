@@ -29,7 +29,9 @@ library(viridis)
 #library(haven)
 library(ggbeeswarm)
 #library(stringr)
-################################################
+
+
+
 #options(OutDec= ".") #Muda de ponto para virgula nos decimais! 
 
 
@@ -48,18 +50,6 @@ banco_nascimentos <- utils::read.csv(localarquivo("banco_nascimentos.csv"), enco
 
 ### Cuidado pois o número de linhas e colunas dessa tabela foi fixado, qualquer mudança e o valor deverá ser alterado! ###
 
-# banco_anomalias <- read_excel(localarquivo("DNRS201018_selected_17-jul-2020.xlsx"), 
-#                               sheet = "LONG_DATA",range = "A1:E8585")%>%
-#   select(1:5) %>%
-#   mutate(ANO_NASC = as.character(ANO_NASC), 
-#          CODMUNRES = as.character(CODMUNRES))%>%
-#   filter(complete.cases(.)) %>%
-#   filter(CODMUNRES != 430000) %>%
-#   mutate(CODMUNRES = as.numeric(CODMUNRES)) %>%
-#   mutate(ANO_NASC = as.numeric(ANO_NASC)) ## Municipio ignorado
-# 
-# 
-# 
 
 
 
@@ -93,92 +83,8 @@ banco_anomalias_analise$municipio <- str_to_lower(banco_anomalias_analise$NOMEMU
 
 remove(banco_aux,banco_aux2,banco_aux3)
 
-### Banco CID
+#
 
-# classificar_cid <- function(x){
-#   aux = substr(x,1,3)
-#   
-#   ifelse(aux=="Q02",1,
-#          ifelse(aux %in% c("Q01", "Q05"),2,
-#                 ifelse(aux %in% c("Q35","Q36","Q37"),3,
-#                        ifelse(aux %in% c("Q71", "Q72", "Q73",  "Q66", "Q69"),4,
-#                               ifelse(aux %in% c("Q54"),5,
-#                                      ifelse(aux %in% c("Q20", "Q21", "Q22", "Q23", "Q24", "Q25", "Q26", "Q27", "Q28"),7,
-#                                             ifelse(aux %in% c("Q90",8,0),8,
-#                                                    ifelse(aux %in% c("Q56"),9,0))
-#                                      )
-#                               )
-#                        )
-#                 )
-#          ))
-# }
-
-
-# 
-# cid_1 <- classificar_cid(banco_anomalias$CODANOMAL)
-# 
-# 
-# classificar_cid2 <- function(x){
-#   ifelse(x %in% c("Q000","Q001","Q002"),2,
-#          ifelse(x == "Q743", 4, 
-#                 ifelse(x %in% c("Q793","Q792"),6,0)))
-# }
-# 
-# cid_2 <- classificar_cid2(banco_anomalias$CODANOMAL)
-# 
-# cid_1[cid_1 == 0] = cid_2[cid_1 == 0]
-# 
-# 
-# banco_cid_aux <- banco_anomalias
-# 
-# banco_cid_aux$cid = factor(cid_1,levels = 1:9,labels =  c("Microcefalia","Defeitos de Tubo Neural","Fendas orais"
-#                                                       ,"Defeitos de redução de membros/ pé torto/ artrogripose / polidactilia","hipospadia"
-#                                                       ,"Defeitos de parede abdominal","Cardiopatias congênitas","Síndrome de Down","Sexo indefinido"))
-# 
-# 
-# 
-# 
-# 
-# banco_cid_aux2 <- banco_cid_aux %>%
-#   group_by(ANO_NASC, CODMUNRES,cid) %>%
-#   summarise(NOMEMUN = unique(NOMEMUN),nascidos_vivos_anomalia = n())
-# 
-# 
-# 
-# 
-# 
-# 
-# banco_cid <- banco_cid_aux2 %>%
-#   left_join(banco_nascimentos,by = c("ANO_NASC","CODMUNRES")) 
-# 
-# 
-# 
-# banco_cid <- banco_cid %>% 
-#   ungroup() %>%
-#   select(ANO_NASC,CODMUNRES,NOMEMUN = NOMEMUN.x,cid, numero_nascidos_vivos,nascidos_vivos_anomalia)
-# 
-# 
-
-
-#### Banco anomalia analises
-
-
-# aux_banco_anomalias = banco_anomalias %>%
-#   group_by(NOMEMUN, ANO_NASC, CODMUNRES) %>%
-#   summarise(nascidos_vivos_anomalia= n()) 
-# 
-# 
-# 
-# banco_anomalias_analise = banco_nascimentos %>% 
-#   left_join(aux_banco_anomalias,by = c("CODMUNRES","ANO_NASC")) %>%
-#   mutate(NOMEMUN = NOMEMUN.x) %>%
-#   subset(select = -c(NOMEMUN.x,NOMEMUN.y)) %>%
-#   mutate(municipio = str_to_lower(NOMEMUN)) %>%
-#   mutate(nascidos_vivos_anomalia = replace_na(nascidos_vivos_anomalia, 0)) %>%
-#   #  na.omit() %>%
-#   #  drop_na() %>%
-#   mutate(prevalencia = (nascidos_vivos_anomalia/numero_nascidos_vivos)*10000) %>%
-#   mutate(prevalencia = replace(prevalencia, is.na(prevalencia), 0)) 
 
 
 mapa_rs <- sf::st_read(localarquivo("shapefiles/43MUE250GC_SIR.shp"), quiet = TRUE) %>%
@@ -217,8 +123,6 @@ limites_nascidos_vivos_anomalia <- 253
 limites_prevalencia <- 2223
 
 
-#remove(classificar_cid,classificar_cid2,cid_1,cid_2,banco_cid_aux,banco_cid_aux2,aux_banco_anomalias)
-
 
 
 
@@ -251,40 +155,6 @@ tabela_box <- banco_anomalias_analise %>%
 
 
 
-
-
-# 
-# 
-# mapa_rs_meso <- sf::st_read(localarquivo("shapefiles/rs_mesorregioes/RS_Mesorregioes_2019.shp"), quiet = TRUE) %>%
-#   mutate(meso= str_to_lower(NM_MESO))
-# linha_lagoa_dos_patos2 =  which(mapa_rs_meso$meso=="lagoa dos patos") 
-# linha_lagoa_mirin2 =  which(mapa_rs_meso$meso=="lagoa mirim")
-# mapa_rs_meso = mapa_rs_meso[-c(linha_lagoa_dos_patos2, linha_lagoa_mirin2), ]
-# 
-# base_mesoregiao <- read.csv(localarquivo("mesoregiao.csv"))
-# 
-# 
-# 
-# 
-
-
-
-
-# 
-# 
-# 
-# 
-# banco_meso_analise_aux <- banco_anomalias_analise  %>%
-#   merge(.,base_mesoregiao,by.x=c("CODMUNRES"),by.y = c("IBGE"))
-# 
-# banco_meso_analise <- banco_meso_analise_aux %>%
-#   group_by(IBGE_meso,Nome_Mesoregiao,ANO_NASC) %>%
-#   summarise(numero_nascidos_vivos = sum(numero_nascidos_vivos), nascidos_vivos_anomalia = sum(nascidos_vivos_anomalia),
-#             prevalencia = nascidos_vivos_anomalia/numero_nascidos_vivos*10^4) %>%
-#   ungroup() 
-# 
-
-#remove(banco_meso_analise_aux,banco_anomalias)
 
 
 banco_macro_saude <- read.csv(localarquivo("MACRORREGIOES_DE_SAUDE.csv")) %>%

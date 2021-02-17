@@ -4,22 +4,13 @@
 
 
 ################################################
-options(OutDec= ".") #Muda de ponto para virgula nos decimais! 
+options(OutDec= ",") #Muda de ponto para virgula nos decimais! 
 
 ################################################################################
 ################
 ################  lendo e adaptando os bancos de dados
 ################
 ################################################################################
-
-
-
-# banco_municipios <- banco_anomalias_analise %>%
-#     filter(ANO_NASC == 2018) %>%
-#     arrange(desc(numero_nascidos_vivos)) %>%
-#     select(NOMEMUN,numero_nascidos_vivos) 
-# 
-# write.csv(banco_municipios,file = "banco_municipios.csv",row.names=FALSE)
 
 
 anos <- 2010:2019
@@ -108,7 +99,6 @@ body <- dashboardBody(
               
               fluidRow(
                 
-                #width = 6,
                 tags$img(src="logo_projeto_anomalias_git.png",height = 107*0.75),
                 tags$img(src="logo_parceiros_projeto.png", height = 107*0.75, width = 1275*.75)
               ),
@@ -172,32 +162,6 @@ body <- dashboardBody(
                     plotlyOutput("grafico_serie_cid"),collapsible = TRUE
                 )
               ), 
-              # fluidRow(
-              #   box(title = "Boxplot da prevalência ao nascimento separado pelo ano",
-              #       width = 6,
-              #       sliderInput("limite_boxplot_cid",
-              #                   "Limites do eixo vertical",
-              #                   min = 0,
-              #                   max = limites_prevalencia,
-              #                   value = c(0,500),
-              #                   step = 1),
-              #       background = "blue",
-              #       plotlyOutput("grafico_boxplot_cid")
-              #   ),
-              #   box(title = "Histograma da prevalência ao nascimento considerando o(s) CID(s) e ano selecionados",
-              #       width = 6,  
-              #       background = "blue",
-              #       sliderInput("limite_hist_prevalencia_cid",
-              #                   "Limites do eixo horizontal",
-              #                   min = 0,
-              #                   max = limites_prevalencia,
-              #                   value = c(0,500),
-              #                   step = 1),
-              #       plotlyOutput("grafico_hist_cid")
-              #       
-              #   )
-              # ),
-              
               
               fluidRow(
                 
@@ -242,36 +206,13 @@ body <- dashboardBody(
                     width = 12,collapsible = TRUE
                   )
                 ),
-              
-              
-              
-              
-              
               fluidRow(
                 column(h2("Tabela de prevalência ao nascimento agrupada por cada grupo de CID considerando as macrorregiões de saúde selecionadas"),
                        width = 12,dataTableOutput("tabela_cid_1", height = 500),
                        downloadButton("downloadData_cid_1", "Download Tabela de dados"),
                        HTML("<br><br><br>")
                 )
-              )
-              
-              # ,
-              # fluidRow(
-              #   column(
-              #     width = 12,
-              #     
-              #   )
-              # )
-              
-              # ,
-              # fluidRow(
-              #   column(
-              #     width = 12,
-              #     
-              #   )
-              # )
-              
-              ,
+              ),
               fluidRow(
                 column(h2("Tabela de prevalência ao nascimento com apenas os grupos de CID's e macrorregiões de saúde selecionados"),
                        width = 12,
@@ -287,8 +228,7 @@ body <- dashboardBody(
                          tags$img(src="pos_estatistica_logo.png", height = 100, width = 220),
                          tags$img(src="ppg_genetica.png", height = 100, width = 124)
                        ))
-              
-              
+
             )
             
     ),  
@@ -481,10 +421,6 @@ body <- dashboardBody(
   
   
   
-  
-  
-  
-  
   tabItem(
     "mapa_n_casos",
     fluidPage(
@@ -564,13 +500,6 @@ body <- dashboardBody(
           box(
             title = "Gráfico da evolução do número de nascidos com anomalias
               20 municipios com maior número de nascidos vivos no RS considerando apenas as macrorregiões de saúde selecionadas",
-            # selectizeInput("input_quadradinhos_casos",
-            #                label = "Escolha o(s) município(s)",
-            #                choices = unique(banco_municipios2$NOMEMUN),
-            #                multiple = T,
-            #                options = list(maxItems = 300, placeholder = 'Escolha as cidades'),
-            #                selected = banco_municipios2$NOMEMUN[1:20]),
-            
             background = "blue",
             htmlOutput("input_quadradinhos_html_casos"),
             plotlyOutput("plot_quadradinhos_casos"),
@@ -626,10 +555,7 @@ body <- dashboardBody(
           width = 12,
           box(
             title ="Mapa dos número de nascidos vivos no ano selecionado considerando apenas o ano e as macrorregiões de saúde selecionados",
-            #h1("Mapa das prevalencias de anomalias congenitas no ano selecionado"),
-            #h4("Dados provenientes da Pre"),
             leafletOutput("mapa_pop", height = "700px"),
-            #HTML("<br><br><br>"),
             width = 12,
             background = "blue"
           )
@@ -661,12 +587,6 @@ body <- dashboardBody(
           width = 12,
           box(
             title = "Gráfico da evolução do número de nascidos vivos considerando apenas as macrorregiões de saúde selecionadas",
-            # selectizeInput("input_quadradinhos_pop",
-            #                label = "Escolha o(s) município(s)",
-            #                choices = unique(banco_municipios2$NOMEMUN),
-            #                multiple = T,
-            #                options = list(maxItems = 300, placeholder = 'Escolha as cidades'),
-            #                selected = banco_municipios2$NOMEMUN[1:20]),
             background = "blue",
             htmlOutput("input_quadradinhos_html_pop"),
             plotlyOutput("plot_quadradinhos_pop"),
@@ -683,48 +603,7 @@ body <- dashboardBody(
         tags$img(src="ppg_genetica.png", height = 100, width = 124)
       ))
       
-    ) ) , #Tabitem fluid paige
-  
-  # tabItem("serie_pop",
-  #         fluidPage(
-  #           titlePanel("Série temporal dos nascidos vivos por município"),
-  # 
-  #           fluidRow(
-  #             column(
-  #               width = 12,
-  #               tags$img(src="ufrgs_logo.png", height = 100, width = 127),
-  #               tags$img(src="logo_ime.png", height = 100, width = 220),
-  #               tags$img(src="ppg_genetica.png", height = 80, width = 95),
-  #               offset = 6
-  #             )
-  #           ),
-  # 
-  #           fluidRow(
-  #             sidebarPanel(
-  #               #h3("Escolha a Cidade"),
-  #               selectizeInput("cidade3",
-  #                              label = "Escolha o município",
-  #                              choices = unique(banco_luzivan_novo$Cidade),
-  #                              multiple = T,
-  #                              options = list(maxItems = 300, placeholder = 'Escolha os municípios
-  #                                           que irão compor o gráfico'),
-  #                              selected = "são luís"),
-  #               #selected = levels(factor(banco_luzivan_novo$Cidade))),
-  #               sliderInput("limite3",
-  #                           "Limites do eixo vertical",
-  #                           min = 0,
-  #                           max = max(banco_luzivan_novo$populacao)+1,
-  #                           value = c(0,max(banco_luzivan_novo$populacao)+1),
-  #                           step = 10),
-  #               width = 12
-  #             )
-  #           ),
-  #           mainPanel(
-  #             plotlyOutput("grafico_serie_pop", height = "600px"),
-  #             width = 12
-  #           )
-  #         )
-  # ),
+    ) ) , 
   
   
  
@@ -754,14 +633,6 @@ body <- dashboardBody(
             
             fluidRow(
               sidebarPanel(
-                #h3("Escolha a Cidade"),
-                #h3("Cursos"),
-                # selectizeInput("cidade2",
-                #                label = "Escolha o município",
-                #                choices = unique(banco_municipios2$NOMEMUN),
-                #                multiple = T,
-                #                options = list(maxItems = 300, placeholder = 'Escolha as cidades'),
-                #                selected = "Porto Alegre"),
                 htmlOutput("input_quadradinhos_html_cidade2"),
                 sliderInput("limite2",
                             "Limites do eixo vertical",
@@ -835,10 +706,8 @@ body <- dashboardBody(
             ),
             br(),br(),
             fluidRow(
-              #column(width = 3),
               column(
                 width = 6,
-                #tags$img(src="ufrgs_logo.png", height = 100, width = 127),
                 tags$img(src="pos_estatistica_logo.png", height = 100, width = 220),
                 tags$img(src="ppg_genetica.png", height = 100, width = 124)
               ))
@@ -958,11 +827,7 @@ body <- dashboardBody(
             
             br(),
             fluidRow(
-              
-              # setZoom(id = "covidMetrika",class = "small-box"),
-              #  setZoom(id = "git_covidMetrika",class = "small-box"),
-              
-          
+
               
               widgetUserBox(title="Projeto Anomalias Congênitas",  h4("Esse Aplicativo foi desenvolvido pelo grupo de epidemiologia do Projeto Anomalias Congênitas e tem como objetivo 
                                                                                     mostrar a distribuição das Anomalias Congênitas por município de  residência da mãe do Estado do Rio Grande do Sul."),
@@ -971,13 +836,7 @@ body <- dashboardBody(
                               class="box box-widget widget-user-2", style="left: 407px;bottom: 207px;"
                             )),
              
-              # widgetUserBox(title="Sobre o aplicativo","Fonte de dados: Sistema de Informação sobre Nascidos Vivos (SINASC)",
-              #               type=2, collapsible = TRUE,color = "", width = 12,
-              #               tags$div(
-              #                 class="box box-widget widget-user-2", style="left: 407px;bottom: 207px;"
-              #               )),
-              # 
-              
+
               h2("Equipe de desenvolvimento do Aplicativo")),
               
               fluidRow(
@@ -1069,11 +928,7 @@ body <- dashboardBody(
                        width = 12,
                        href = "https://github.com/projetoanomaliascongenitas/App_Anomalias_Congenitas"
               )
-              # ),v
-              # 
-              # 
-              # tags$img(src = "logos.png", 
-              #          height = "150", width = "1000")
+
             ),
             
             
@@ -1093,11 +948,6 @@ body <- dashboardBody(
   
 )) 
 
-
-
-
-
-#shinyUI(dashboardPage(header, sidebar,rightsidebar, body))
 
 shinyUI(dashboardPagePlus(enable_preloader = T, rightsidebar = rightsidebar, header = header, sidebar = sidebar, 
                           body = body))
