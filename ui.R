@@ -926,7 +926,7 @@ body <- dashboardBody(
                        icon = icon("github"), 
                        color = "green", 
                        width = 12,
-                       href = "https://github.com/projetoanomaliascongenitas/App_Anomalias_Congenitas"
+                       href = "https://github.com/anomaliascongenitas/App_Anomalias_Congenitas_RS"
               )
 
             ),
