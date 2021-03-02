@@ -5,9 +5,9 @@ account: projetoanomaliascongenitas
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3602423
-bundleId: 4225813
+bundleId: 4279086
 url: https://projetoanomaliascongenitas.shinyapps.io/ac_rs/
-when: 1613400050.07368
+when: 1614440158.54513
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: .gitattributes|.RData|.RDataTmp|banco_manipulacao.R|I_de_moran_gerando_estatisticas.R|macro_saude_testes.R|pacotes.R|README.md|scan_app.R
+ignoredFiles: .gitattributes|.RData|banco_manipulacao.R|I_de_moran_gerando_estatisticas.R|macro_saude_testes.R|pacotes.R|README.md|scan_app.R

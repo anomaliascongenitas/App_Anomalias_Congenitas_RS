@@ -721,8 +721,6 @@ server <- function(input, output,session) {
           group_by(cid,ANO_NASC) %>%
           summarise(nascidos_vivos_anomalia = n())
         
-        
-        
         myLevels <- banco %>%
           group_by(cid) %>%
           summarise(nascidos_vivos_anomalia = sum(nascidos_vivos_anomalia)) %>%
@@ -731,13 +729,8 @@ server <- function(input, output,session) {
         banco$cid <- factor(banco$cid , levels=myLevels$cid )
         
         #banco$ANO_NASC <- as.numeric(banco$ANO_NASC)
-        
-        
         banco <- banco %>%
           select(CID = cid,ano_nascimento = ANO_NASC,nascidos_vivos_anomalia = nascidos_vivos_anomalia)
-        
-        
-        
         
         
         p <- ggplot(banco, aes(x=ano_nascimento, y=nascidos_vivos_anomalia, fill=CID)) + 
@@ -784,7 +777,7 @@ server <- function(input, output,session) {
             #paging = FALSE
           )
         )%>%
-        formatCurrency(6,' ', digits = 3, interval = 3, mark = "", dec.mark = ",")
+        formatCurrency(2:11,' ', digits = 3, interval = 3, mark = "", dec.mark = ",")
     })
     
     

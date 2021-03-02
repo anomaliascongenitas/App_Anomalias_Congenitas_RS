@@ -35,14 +35,13 @@ library(RColorBrewer)
 
 
 
-mapa_rs <- sf::st_read("shapefiles/43MUE250GC_SIR.shp", quiet = TRUE) %>%
-  mutate(municipio= str_to_lower(NM_MUNICIP))
-linha_lagoa_dos_patos=  which(mapa_rs$municipio=="lagoa dos patos") 
-linha_lagoa_mirin=  which(mapa_rs$municipio=="lagoa mirim")
-mapa_rs = mapa_rs[-c(linha_lagoa_dos_patos, linha_lagoa_mirin), ]
+mapa <- sf::st_read(localarquivo("shapefiles/sc_municipios/SC_Municipios_2019.shp"), quiet = TRUE) %>%
+  mutate(municipio= str_to_lower(NM_MUN)) %>%
+  select(-SIGLA_UF,-AREA_KM2)
+
 
 banco_i_moran <- banco_anomalias_analise %>%
-  right_join(mapa_rs) 
+  right_join(mapa) 
 banco_i_moran = st_as_sf(banco_i_moran)
 banco_i_moran <- st_transform(banco_i_moran, "+init=epsg:4326") ##leaflet
 
@@ -73,4 +72,4 @@ for (i in 2011:2019){
 valores_teste_tabelado =  data.frame(estatistica = valores_teste[,1], 
                                      p_valor= valores_teste[,2], ano = valores_teste[,3])
 
-write.table(valores_teste_tabelado, file = "teste_moran_rs.txt", row.names = FALSE, col.names = FALSE)
+write.table(valores_teste_tabelado, file = "teste_moran.txt", row.names = FALSE, col.names = FALSE)
