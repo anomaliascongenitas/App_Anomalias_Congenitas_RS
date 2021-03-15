@@ -38,7 +38,8 @@ gerar_banco_modelo_aux <- function(cid2){
   
   
   banco_aux2 <- banco_aux2 %>%
-    filter(NOMEMUN != "Pinto Bandeira")
+    filter(NOMEMUN != "Pinto Bandeira") %>%
+    arrange(CODMUNRES)
   
   
   return(banco_aux2)
@@ -58,7 +59,7 @@ lista_completa <- list()
 
 
 
-i = 7
+
 
 
 for (i in 1:9) {
@@ -92,8 +93,8 @@ for (i in 1:9) {
   banco_modelo_mapa_sf  = st_as_sf(banco_modelo_mapa)
   banco_modelo_mapa_sf  <- st_transform(banco_modelo_mapa_sf )
   nb <- poly2nb(banco_modelo_mapa_sf)
-  nb2INLA("map.adj", nb)
-  g <- inla.read.graph(filename = localarquivo("modelagem/Scan/map.adj"))
+  nb2INLA(localarquivo("map.adj"), nb)
+  g <- inla.read.graph(filename = localarquivo("map.adj"))
   
   
   
@@ -122,19 +123,9 @@ for (i in 1:9) {
 
   
   lista2 <- banco_modelo_aux %>%
-    filter(CODMUNRES %in% colnames(counts[,poisson_result$MLC$locations]))
+    filter(CODMUNRES %in% colnames(counts[,c(poisson_result$MLC$zone_number,poisson_result$MLC$locations)]))
   
-  lista2
-  
-  
-  
-  lista <- banco_modelo_aux %>%
-    filter(CODMUNRES %in% colnames(counts[,poisson_result$MLC$locations]))
-  
-  
-  
-  
-  
+
   
   county_scores <- score_locations(poisson_result, g$nbs)
   lista_completa[[i]] <- list(MC_pvalue = poisson_result,cluster = lista2,relative_score = county_scores)
