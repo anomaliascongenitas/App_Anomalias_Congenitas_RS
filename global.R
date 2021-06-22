@@ -32,6 +32,12 @@ library(ggbeeswarm)
 
 
 
+preposicao_sigla_uf <- "do"
+preposicao_sigla_uf_2 <- "do"
+sigla_uf <- "RS"
+uf_extenso <- "Rio Grande do Sul"
+
+
 #options(OutDec= ".") #Muda de ponto para virgula nos decimais! 
 
 
@@ -46,21 +52,20 @@ localarquivo <- function(x){
 ################
 ################################################################################
 
-banco_nascimentos <- utils::read.csv(localarquivo("banco_nascimentos.csv"), encoding="UTF-8")
 
-### Cuidado pois o número de linhas e colunas dessa tabela foi fixado, qualquer mudança e o valor deverá ser alterado! ###
+########################
+## Banco Nascidos vivos
+########################
+
+banco_nascimentos <- utils::read.csv(localarquivo("nascidos_vivos.csv"), encoding="UTF-8")
 
 
-
-
-
-
-banco_2019 <- utils::read.csv(file= localarquivo("banco_anomalias_2010-2019.csv"), encoding="UTF-8") %>%
+banco_cid  <- utils::read.csv(file= localarquivo("banco_nascimentos_anomalias.csv"), encoding="UTF-8") %>%
   rename(ANO_NASC = ANONASC)
 
-banco_cid <- banco_2019
 
-banco_aux <- banco_2019 %>%
+
+banco_aux <- banco_cid  %>%
   # filter(cid_num %in% 1:9) %>%
   group_by(NUMERODN) %>%
   summarise(ANO_NASC = unique(ANO_NASC),CODMUNRES = unique(CODMUNRES),nascidos_vivos_anomalia = 1)
@@ -87,11 +92,11 @@ remove(banco_aux,banco_aux2,banco_aux3)
 
 
 
-mapa_rs <- sf::st_read(localarquivo("shapefiles/43MUE250GC_SIR.shp"), quiet = TRUE) %>%
+mapa <- sf::st_read(localarquivo("shapefiles/43MUE250GC_SIR.shp"), quiet = TRUE) %>%
   mutate(municipio= str_to_lower(NM_MUNICIP))
-linha_lagoa_dos_patos=  which(mapa_rs$municipio=="lagoa dos patos") 
-linha_lagoa_mirin=  which(mapa_rs$municipio=="lagoa mirim")
-mapa_rs = mapa_rs[-c(linha_lagoa_dos_patos, linha_lagoa_mirin), ]
+linha_lagoa_dos_patos=  which(mapa$municipio=="lagoa dos patos") 
+linha_lagoa_mirin=  which(mapa$municipio=="lagoa mirim")
+mapa = mapa[-c(linha_lagoa_dos_patos, linha_lagoa_mirin), ]
 
 ####################################################################################
 ### Intervalos cores mapa prevalencia
@@ -118,9 +123,9 @@ bins_defalt_nascidos_vivos_anomalia = classInt::classIntervals(var = variavel_in
 
 
 
-anos <- 2010:2018
-limites_nascidos_vivos_anomalia <- 253
-limites_prevalencia <- 2223
+anos <- min(banco_anomalias_analise$ANO_NASC):max(banco_anomalias_analise$ANO_NASC)
+limites_nascidos_vivos_anomalia <- round(max(banco_anomalias_analise$nascidos_vivos_anomalia)*1.05,0)
+limites_prevalencia <- round(max(banco_anomalias_analise$prevalencia)*1.05,0)
 
 
 
@@ -132,7 +137,7 @@ limites_prevalencia <- 2223
 ## Moran 
 banco_i_moran_matriz = banco_anomalias_analise %>%
   filter(ANO_NASC == 2018) %>%
-  right_join(mapa_rs)
+  right_join(mapa)
 
 w <- poly2nb(banco_i_moran_matriz$geometry, row.names=banco_i_moran_matriz$municipio)
 matriz_w <-  nb2listw(w, style='B') #faz a matriz de pesos 0 ou 1
@@ -158,7 +163,10 @@ tabela_box <- banco_anomalias_analise %>%
 
 
 banco_macro_saude <- read.csv(localarquivo("MACRORREGIOES_DE_SAUDE.csv")) %>%
-  select(IBGE,macrorregiao)
+  select(IBGE,municipio,macrorregiao)
+
+banco_macro_saude$macro_cod = as.numeric(banco_macro_saude$macrorregiao)
+
 
 macro_saude_shape <- sf::st_read(localarquivo("shapefiles/macro_saude_rs/macro_saude_rs.shp"), quiet = TRUE) 
 names(macro_saude_shape) <- c("IBGE","municipio","macroregiao","macroregiao_num","geometry")
@@ -178,13 +186,13 @@ banco_macro_saude_analise <- banco_macro_saude_analise_aux  %>%
 
 
 
-mapa_rs_modelo <- sf::st_read(localarquivo("shapefiles//43MUE250GC_SIR_2010.shp"), quiet = TRUE) %>%
+mapa_modelo <- sf::st_read(localarquivo("shapefiles//43MUE250GC_SIR_2010.shp"), quiet = TRUE) %>%
   mutate(municipio= str_to_lower(NM_MUNICIP))
 
 
-linha_lagoa_dos_patos=  which(mapa_rs_modelo$municipio=="lagoa dos patos") 
-linha_lagoa_mirin=  which(mapa_rs_modelo$municipio=="lagoa mirim")
-mapa_rs_modelo  = mapa_rs_modelo[-c(linha_lagoa_dos_patos, linha_lagoa_mirin), ]
+linha_lagoa_dos_patos=  which(mapa_modelo$municipio=="lagoa dos patos") 
+linha_lagoa_mirin=  which(mapa_modelo$municipio=="lagoa mirim")
+mapa_modelo  = mapa_modelo[-c(linha_lagoa_dos_patos, linha_lagoa_mirin), ]
 
 
 

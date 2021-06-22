@@ -1,3 +1,4 @@
+#install.packages("INLA",repos=c(getOption("repos"),INLA="https://inla.r-inla-download.org/R/stable"), dep=TRUE)
 library(scanstatistics)
 library(ggplot2)
 library(dplyr)
@@ -6,6 +7,7 @@ library(dplyr)
 library(stringr)
 library(INLA)
 #library(rlist)
+library(rgeos)
 
 ## here deve estar localizado na pasta principal onde esta o aplicativo Shiny (arquivo global.r)
 localarquivo <- function(x){
@@ -92,11 +94,15 @@ for (i in 1:9) {
   
   banco_modelo_mapa_sf  = st_as_sf(banco_modelo_mapa)
   banco_modelo_mapa_sf  <- st_transform(banco_modelo_mapa_sf )
-  nb <- poly2nb(banco_modelo_mapa_sf)
-  nb2INLA(localarquivo("map.adj"), nb)
-  g <- inla.read.graph(filename = localarquivo("map.adj"))
+  tidy <- st_transform(banco_modelo_mapa_sf, crs = 4326)
+  sp_cent <- gCentroid(as(banco_modelo_mapa_sf, "Spatial"), byid = TRUE)
+  cords <- coordinates(sp_cent)
   
-  
+  zones <- cords %>%
+    as.matrix %>%
+    spDists(x = ., y = ., longlat = TRUE) %>%
+    dist_to_knn(k = 15) %>%
+    knn_zones
   
   
   proporcao_media <- banco_modelo %>%
@@ -105,29 +111,26 @@ for (i in 1:9) {
   
   
   banco_modelo$valor_esperado <- banco_modelo$numero_nascidos_vivos*proporcao_media$valor[banco_modelo$ANO_NASC - 2009]
+  banco_modelo$valor_esperado[banco_modelo$valor_esperado == 0] = 0.0001
+  
   
   ebp_baselines <- banco_modelo  %>% 
-    #df_to_matrix(value_col = "mu")
     df_to_matrix(time_col = "ANO_NASC", location_col = "CODMUNRES", value_col = "valor_esperado")
   
   
   
   set.seed(1)
   poisson_result <- scan_eb_poisson(counts = counts, 
-                                    zones = g$nbs , #max_duration = 3,
+                                    zones = zones , #max_duration = 3,
                                     baselines = ebp_baselines,
                                     n_mcsim = 9999)
-  print(poisson_result)
+  #print(poisson_result)
   
   
-
   
-  lista2 <- banco_modelo_aux %>%
-    filter(CODMUNRES %in% colnames(counts[,c(poisson_result$MLC$zone_number,poisson_result$MLC$locations)]))
+  lista2 <- banco_modelo_aux[poisson_result$MLC$locations,]
   
-
-  
-  county_scores <- score_locations(poisson_result, g$nbs)
+  county_scores <- score_locations(poisson_result, zones)
   lista_completa[[i]] <- list(MC_pvalue = poisson_result,cluster = lista2,relative_score = county_scores)
 }
 
